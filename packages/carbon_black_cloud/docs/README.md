@@ -315,8 +315,6 @@ An example event for `alert` looks as following:
 | carbon_black_cloud.alert.category | The category of the alert. | keyword |
 | carbon_black_cloud.alert.count |  | long |
 | carbon_black_cloud.alert.created_by_event_id | Event identifier that initiated the alert. | keyword |
-| carbon_black_cloud.alert.device.external_ip | External IP of the device. | ip |
-| carbon_black_cloud.alert.device.internal_ip | Internal IP of the device. | ip |
 | carbon_black_cloud.alert.device.location | The Location of device. | keyword |
 | carbon_black_cloud.alert.device.os | OS of the device. | keyword |
 | carbon_black_cloud.alert.document_guid | Unique ID of document. | keyword |
