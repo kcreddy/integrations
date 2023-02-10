@@ -84,11 +84,6 @@ processors:
         - append:
             field: error.message
             value: '{{{_ingest.on_failure_message}}}'
-  - urldecode:
-      field: json.alert_url
-      target_field: event.url
-      ignore_missing: true
-      ignore_failure: true
   - rename:
       field: json.reason
       target_field: event.reason
@@ -393,7 +388,6 @@ processors:
         - json.last_update_time
         - json.first_event_time
         - json.device_id
-        - json.alert_url
         - json.count
         - json.notes_present
         - json.device_internal_ip
