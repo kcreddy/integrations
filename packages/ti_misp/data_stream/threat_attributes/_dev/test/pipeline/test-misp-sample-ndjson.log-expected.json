@@ -729,6 +729,63 @@
             }
         },
         {
+            "@timestamp": "2014-10-06T07:10:57.000Z",
+            "ecs": {
+                "version": "8.11.0"
+            },
+            "event": {
+                "category": [
+                    "threat"
+                ],
+                "kind": "enrichment",
+                "original": "{\"id\":\"1085\",\"event_id\":\"3\",\"object_id\":\"0\",\"object_relation\":null,\"category\":\"Network activity\",\"type\":\"ip-dst\",\"to_ids\":true,\"uuid\":\"54324081-3308-4f1f-8674-4953950d210b\",\"timestamp\":\"1412579457\",\"distribution\":\"5\",\"sharing_group_id\":\"0\",\"comment\":\"\",\"deleted\":false,\"disable_correlation\":false,\"first_seen\":null,\"last_seen\":null,\"value\":\"67.43.156.0\",\"Event\":{\"org_id\":\"1\",\"distribution\":\"3\",\"id\":\"2\",\"info\":\"OSINT New Indicators of Compromise for APT Group Nitro Uncovered blog post by Palo Alto Networks\",\"orgc_id\":\"2\",\"uuid\":\"54323f2c-e50c-4268-896c-4867950d210b\"}}",
+                "type": [
+                    "indicator"
+                ]
+            },
+            "misp": {
+                "attribute": {
+                    "category": "Network activity",
+                    "comment": "",
+                    "decayed": true,
+                    "decayed_at": "2014-10-11T07:10:57.000Z",
+                    "deleted": false,
+                    "disable_correlation": false,
+                    "distribution": 5,
+                    "event_id": "3",
+                    "id": "1085",
+                    "object_id": "0",
+                    "sharing_group_id": "0",
+                    "to_ids": true,
+                    "type": "ip-dst",
+                    "uuid": "54324081-3308-4f1f-8674-4953950d210b"
+                },
+                "event": {
+                    "distribution": 3,
+                    "id": "2",
+                    "info": "OSINT New Indicators of Compromise for APT Group Nitro Uncovered blog post by Palo Alto Networks",
+                    "orgc_id": "2",
+                    "uuid": "54323f2c-e50c-4268-896c-4867950d210b"
+                }
+            },
+            "organization": {
+                "id": "1"
+            },
+            "tags": [
+                "preserve_original_event"
+            ],
+            "threat": {
+                "feed": {
+                    "name": "MISP"
+                },
+                "indicator": {
+                    "ip": "67.43.156.0",
+                    "provider": "misp",
+                    "type": "ipv4-addr"
+                }
+            }
+        },
+        {
             "@timestamp": "2014-10-28T19:55:46.000Z",
             "ecs": {
                 "version": "8.11.0"

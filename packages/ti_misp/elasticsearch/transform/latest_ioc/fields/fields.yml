@@ -285,3 +285,7 @@
           description: >
             List of attributes of the object in which the attribute is attached.
 
+- description: Identifies a threat indicator as an IP address (irrespective of direction).
+  name: threat.indicator.ip
+  type: ip
+  ignore_malformed: true

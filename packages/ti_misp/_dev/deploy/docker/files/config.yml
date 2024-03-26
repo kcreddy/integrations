@@ -964,6 +964,33 @@ rules:
             "response": {
               "Attribute": [
                 {
+                  "id": "1085",
+                  "event_id": "3",
+                  "object_id": "0",
+                  "object_relation": null,
+                  "category": "Network activity",
+                  "type": "ip-dst",
+                  "to_ids": true,
+                  "uuid": "54324081-3308-4f1f-8674-4953950d210b",
+                  "timestamp": "1412579457",
+                  "distribution": "5",
+                  "sharing_group_id": "0",
+                  "comment": "",
+                  "deleted": false,
+                  "disable_correlation": false,
+                  "first_seen": null,
+                  "last_seen": null,
+                  "value": "67.43.156.0/24",
+                  "Event": {
+                      "org_id": "1",
+                      "distribution": "3",
+                      "id": "2",
+                      "info": "OSINT New Indicators of Compromise for APT Group Nitro Uncovered blog post by Palo Alto Networks",
+                      "orgc_id": "2",
+                      "uuid": "54323f2c-e50c-4268-896c-4867950d210b"
+                  }
+                },
+                {
                   "id": "1",
                   "event_id": "1",
                   "object_id": "0",

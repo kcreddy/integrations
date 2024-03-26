@@ -1,4 +1,9 @@
 # newer versions go on top
+- version: "1.32.1"
+  changes:
+    - description: Set attributes's destination `index.mapping.ignore_malformed` to `true`.
+      type: enhancement
+      link: https://github.com/elastic/integrations/pull/1111
 - version: "1.32.0"
   changes:
     - description: Set sensitive values as secret.
