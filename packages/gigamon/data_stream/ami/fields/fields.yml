@@ -1,0 +1,8 @@
+- name: gigamon.ami
+  type: group
+  fields:
+    - name: ami
+      type: flattened
+      description: >
+        Collective of json data from gigamon ami
+
