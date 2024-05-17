@@ -1,84 +1,60 @@
-<!-- Use this template language as a starting point, replacing {placeholder text} with details about the integration. -->
-<!-- Find more detailed documentation guidelines in https://github.com/elastic/integrations/blob/main/docs/documentation_guidelines.md -->
+# Gigamon Integration
 
-# Gigamon package
+The [AWS Bedrock](https://docs.aws.amazon.com/bedrock/index.html) model
+invocation logs integration allows you to easily connect your Bedrock model
+invocation logging to Elastic for seamless collection of invocation logs to
+monitor usage. Elastic Security can leverage this data for security analytics
+including correlation, visualization and incident response. With invocation
+logging, you can collect the full request and response data, and any metadata
+associated with use of your account.
 
-<!-- The Gigamon package integration allows you to monitor {name of service}. {name of service} is {describe service}.
-
-Use the Gigamon package integration to {purpose}. Then visualize that data in Kibana, create alerts to notify you if something goes wrong, and reference {data stream type} when troubleshooting an issue.
-
-For example, if you wanted to {sample use case} you could {action}. Then you can {visualize|alert|troubleshoot} by {action}. -->
+## Compatibility
 
 ## Data streams
 
-<!-- The Gigamon package integration collects {one|two} type{s} of data streams: {logs and/or metrics}. -->
-
-<!-- If applicable -->
-<!-- **Logs** help you keep a record of events happening in {service}.
-Log data streams collected by the {name} integration include {sample data stream(s)} and more. See more details in the [Logs](#logs-reference). -->
-
-<!-- If applicable -->
-<!-- **Metrics** give you insight into the state of {service}.
-Metric data streams collected by the {name} integration include {sample data stream(s)} and more. See more details in the [Metrics](#metrics-reference). -->
-
-<!-- Optional: Any additional notes on data streams -->
+The Gigamon integration currently provides a single
+data stream: `ami`.
 
 ## Requirements
 
-You need Elasticsearch for storing and searching your data and Kibana for visualizing and managing it.
-You can use our hosted Elasticsearch Service on Elastic Cloud, which is recommended, or self-manage the Elastic Stack on your own hardware.
+- Elastic Agent must be installed.
+- You can install only one Elastic Agent per host.
 
-<!--
-	Optional: Other requirements including:
-	* System compatibility
-	* Supported versions of third-party products
-	* Permissions needed
-	* Anything else that could block a user from successfully using the integration
--->
+### Installing and managing an Elastic Agent:
 
-## Setup
+You have a few options for installing and managing an Elastic Agent:
 
-<!-- Any prerequisite instructions -->
+### Install a Fleet-managed Elastic Agent (recommended):
 
-For step-by-step instructions on how to set up an integration, see the
-[Getting started](https://www.elastic.co/guide/en/welcome-to-elastic/current/getting-started-observability.html) guide.
+With this approach, you install Elastic Agent and use Fleet in Kibana to
+define, configure, and manage your agents in a central location. We recommend
+using Fleet management because it makes the management and upgrade of your
+agents considerably easier.
 
-<!-- Additional set up instructions -->
+### Install Elastic Agent in standalone mode (advanced users):
 
-<!-- If applicable -->
-<!-- ## Logs reference -->
+With this approach, you install Elastic Agent and manually configure the agent
+locally on the system where it is installed. You are responsible for managing
+and upgrading the agents. This approach is reserved for advanced users only.
 
-<!-- Repeat for each data stream of the current type -->
-<!-- ### {Data stream name}
+### Install Elastic Agent in a containerized environment:
 
-The `{data stream name}` data stream provides events from {source} of the following types: {list types}. -->
+You can run Elastic Agent inside a container, either with Fleet Server or
+standalone. Docker images for all versions of Elastic Agent are available
+from the Elastic Docker registry, and we provide deployment manifests for
+running on Kubernetes.
 
-<!-- Optional -->
-<!-- #### Example
+There are some minimum requirements for running Elastic Agent and for more
+information, refer to the link [here](https://www.elastic.co/guide/en/fleet/current/elastic-agent-installation.html).
 
-An example event for `{data stream name}` looks as following:
+The minimum **kibana.version** required is **8.12.0**.
 
-{code block with example} -->
 
-<!-- #### Exported fields
+### Setup
 
-{insert table} -->
+## Gigamon setup
 
-<!-- If applicable -->
-<!-- ## Metrics reference -->
 
-<!-- Repeat for each data stream of the current type -->
-<!-- ### {Data stream name}
+{{fields "ami"}}
 
-The `{data stream name}` data stream provides events from {source} of the following types: {list types}. -->
-
-<!-- Optional -->
-<!-- #### Example
-
-An example event for `{data stream name}` looks as following:
-
-{code block with example} -->
-
-<!-- #### Exported fields
-
-{insert table} -->
+{{event "ami"}}

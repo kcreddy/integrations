@@ -8,4 +8,4 @@ services:
       - STREAM_PROTOCOL=webhook
       - STREAM_ADDR=http://elastic-agent:9559/
       - STREAM_WEBHOOK_HEADER=Content-Type=application/ndjson
-    command: log --start-signal=SIGHUP --delay=5s /sample_logs/ami-http_endpoint.log
+    command: log --start-signal=SIGHUP --delay=5s /sample_logs/ami-*.log
