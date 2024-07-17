@@ -11,11 +11,18 @@ import (
 	"github.com/elastic/integrations/dev/codeowners"
 )
 
-type errorLinks struct {
-	currentIssueURL string
-	firstBuild      string
-	previousBuilds  []string
-	closedIssueURL  string
+type PackageError struct {
+	testCase
+	Serverless        bool
+	ServerlessProject string
+	StackVersion      string
+	BuildURL          string
+	Teams             []string
+	TeamLabels        []string
+	PackageName       string
+	DataStream        string
+	PreviousBuilds    []string
+	ClosedIssueURL    string
 }
 
 type packageError struct {
@@ -68,6 +75,15 @@ func newPackageError(options packageErrorOptions) (*packageError, error) {
 			return nil, fmt.Errorf("failed to find owners for package %s: %w", p.packageName, err)
 		}
 		p.teams = owners
+	}
+
+	ghTeamLabels, err := GetTeamLabels()
+	if err != nil {
+		fmt.Printf("")
+	}
+	for _, owner := range owners {
+		// fmt.Println(owner)
+
 	}
 
 	return &p, nil
