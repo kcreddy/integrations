@@ -78,12 +78,17 @@ func newPackageError(options packageErrorOptions) (*packageError, error) {
 		p.teams = owners
 	}
 
+	// Get Team:Labels to add to Github Issue Labels
 	ghTeamLabels, err := teamlabels.GetTeamLabels()
 	if err != nil {
 		fmt.Printf("Error while fetching team labels: %s", err)
 	}
 	for _, owner := range owners {
-		p.TeamLabels = append(p.TeamLabels, ghTeamLabels[owner])
+		if teamlabel, ok := ghTeamLabels[owner]; ok {
+			p.TeamLabels = append(p.TeamLabels, teamlabel)
+		} else {
+			fmt.Printf("No Team: label for owner %s", owner)
+		}
 	}
 
 	return &p, nil
