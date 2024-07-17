@@ -11,6 +11,7 @@ import (
 	"os"
 	"path/filepath"
 	"sort"
+	"strings"
 
 	"github.com/elastic/integrations/dev/codeowners"
 )
@@ -86,6 +87,21 @@ func Check(ctx context.Context, resultsPath string, options CheckOptions) error 
 		if err != nil {
 			return fmt.Errorf("failed to create initial issue: %w", err)
 		}
+		fmt.Println()
+		fmt.Println("---- Issue ----")
+		fmt.Printf("Title: %q\n", r.Title())
+		fmt.Printf("Teams: %q\n", strings.Join(r.Owners(), ", "))
+		fmt.Printf("TeamLabels: %q\n", strings.Join(r.TeamLabels(), ", "))
+		fmt.Printf("Summary:\n%s\n", r.Summary())
+		fmt.Println("----")
+		fmt.Println()
+
+		ghIssue := NewGithubIssue(GithubIssueOptions{
+			Title:       r.Title(),
+			Description: r.Description(),
+			Labels:      r.Labels(),
+			Repository:  "elastic/integrations",
+		})
 
 		if err := aReporter.Report(ctx, ghIssue, pError); err != nil {
 			multiErr = errors.Join(multiErr, err)

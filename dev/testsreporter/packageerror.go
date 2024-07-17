@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/elastic/integrations/dev/codeowners"
+	"github.com/elastic/integrations/dev/teamlabels"
 )
 
 type PackageError struct {
@@ -77,13 +78,12 @@ func newPackageError(options packageErrorOptions) (*packageError, error) {
 		p.teams = owners
 	}
 
-	ghTeamLabels, err := GetTeamLabels()
+	ghTeamLabels, err := teamlabels.GetTeamLabels()
 	if err != nil {
-		fmt.Printf("")
+		fmt.Printf("Error while fetching team labels: %s", err)
 	}
 	for _, owner := range owners {
-		// fmt.Println(owner)
-
+		p.TeamLabels = append(p.TeamLabels, ghTeamLabels[owner])
 	}
 
 	return &p, nil
