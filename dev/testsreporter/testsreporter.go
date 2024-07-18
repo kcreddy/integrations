@@ -23,11 +23,7 @@ type CheckOptions struct {
 	StackVersion      string
 	BuildURL          string
 	CodeownersPath    string
-
-	MaxPreviousLinks int
-	MaxTestsReported int
-
-	DryRun bool
+	TeamLabelsPath    string
 }
 
 func Check(ctx context.Context, resultsPath string, options CheckOptions) error {
@@ -91,7 +87,7 @@ func Check(ctx context.Context, resultsPath string, options CheckOptions) error 
 		fmt.Println("---- Issue ----")
 		fmt.Printf("Title: %q\n", r.Title())
 		fmt.Printf("Teams: %q\n", strings.Join(r.Owners(), ", "))
-		fmt.Printf("TeamLabels: %q\n", strings.Join(r.TeamLabels(), ", "))
+		fmt.Printf("Labels: %q\n", strings.Join(r.Labels(), ", "))
 		fmt.Printf("Summary:\n%s\n", r.Summary())
 		fmt.Println("----")
 		fmt.Println()
@@ -136,6 +132,7 @@ func errorsFromTests(resultsPath string, options CheckOptions) ([]*packageError,
 				BuildURL:          options.BuildURL,
 				TestCase:          c,
 				CodeownersPath:    options.CodeownersPath,
+				TeamLabelsPath:    options.TeamLabelsPath,
 			})
 			if err != nil {
 				return fmt.Errorf("failed to create package error: %w", err)

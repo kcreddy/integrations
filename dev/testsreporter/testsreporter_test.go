@@ -31,9 +31,11 @@ func TestErrorsFromTest(t *testing.T) {
 						TimeInSeconds: 1368.349501429,
 						Failure:       "could not find hits in logs-cisco_umbrella.log-ep data stream",
 					},
-					teams:       []string{"@elastic/security-service-integrations"},
-					dataStream:  "log",
-					packageName: "cisco_umbrella",
+					Teams:       []string{"@elastic/security-service-integrations"},
+					TeamLabels:  []string{"Team:Security-Service Integrations"},
+					DataStream:  "log",
+					PackageName: "cisco_umbrella",
+					Serverless:  false,
 				},
 				{
 					dataError: dataError{
@@ -45,9 +47,11 @@ func TestErrorsFromTest(t *testing.T) {
 						TimeInSeconds: 1368.349501429,
 						Error:         "could not find hits in logs-elastic_package_registry.metrics-ep data stream",
 					},
-					teams:       []string{"@elastic/ecosystem"},
-					dataStream:  "metrics",
-					packageName: "elastic_package_registry",
+					Teams:       []string{"@elastic/ecosystem"},
+					TeamLabels:  []string{"Team:Ecosystem"},
+					DataStream:  "metrics",
+					PackageName: "elastic_package_registry",
+					Serverless:  false,
 				},
 				{
 					dataError: dataError{
@@ -69,9 +73,11 @@ func TestErrorsFromTest(t *testing.T) {
              }
 `,
 					},
-					packageName: "fortinet_fortigate",
-					dataStream:  "log",
-					teams:       []string{"@elastic/sec-deployment-and-devices"},
+					PackageName: "fortinet_fortigate",
+					DataStream:  "log",
+					Teams:       []string{"@elastic/sec-deployment-and-devices"},
+					TeamLabels:  []string{"Team:Security-Deployment and Devices"},
+					Serverless:  false,
 				},
 				{
 					dataError: dataError{
@@ -83,9 +89,11 @@ func TestErrorsFromTest(t *testing.T) {
 						TimeInSeconds: 34.296986222,
 						Failure:       "one or more errors found in documents stored in metrics-sql.sql-12466 data stream: [0] found error.message in event: cannot open connection: testing connection: mssql: login error: Login failed for user 'SA'.",
 					},
-					packageName: "sql_input",
-					dataStream:  "",
-					teams:       []string{"@elastic/obs-infraobs-integrations"},
+					PackageName: "sql_input",
+					DataStream:  "",
+					Teams:       []string{"@elastic/obs-infraobs-integrations"},
+					TeamLabels:  []string{"Team:Obs-InfraObs"},
+					Serverless:  false,
 				},
 				{
 					dataError: dataError{
@@ -97,9 +105,11 @@ func TestErrorsFromTest(t *testing.T) {
 						TimeInSeconds: 34.25843055,
 						Failure:       "one or more errors found in documents stored in metrics-sql.sql-98584 data stream: [0] found error.message in event: cannot open connection: testing connection: dial tcp 172.21.0.6:3306: connect: connection refused",
 					},
-					packageName: "sql_input",
-					dataStream:  "",
-					teams:       []string{"@elastic/obs-infraobs-integrations"},
+					PackageName: "sql_input",
+					DataStream:  "",
+					Teams:       []string{"@elastic/obs-infraobs-integrations"},
+					TeamLabels:  []string{"Team:Obs-InfraObs"},
+					Serverless:  false,
 				},
 			},
 		},
@@ -112,6 +122,7 @@ func TestErrorsFromTest(t *testing.T) {
 				StackVersion:   "",
 				BuildURL:       "",
 				CodeownersPath: "testdata/CODEOWNERS-default-tests",
+				TeamLabelsPath: "testdata/team_labels-default-tests",
 			})
 			require.NoError(t, err)
 
@@ -148,6 +159,7 @@ func TestErrorDataStream(t *testing.T) {
 				StackVersion:   "",
 				BuildURL:       "",
 				CodeownersPath: "testdata/CODEOWNERS-default-tests",
+				TeamLabelsPath: "testdata/team_labels-default-tests",
 			})
 			require.NoError(t, err)
 
@@ -188,6 +200,7 @@ func TestErrorPackageName(t *testing.T) {
 				StackVersion:   "",
 				BuildURL:       "",
 				CodeownersPath: "testdata/CODEOWNERS-default-tests",
+				TeamLabelsPath: "testdata/team_labels-default-tests",
 			})
 			require.NoError(t, err)
 

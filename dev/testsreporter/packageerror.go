@@ -42,9 +42,7 @@ type packageErrorOptions struct {
 	BuildURL          string
 	TestCase          testCase
 	CodeownersPath    string
-	ClosedIssueURL    string
-	PreviousBuilds    []string
-	Teams             []string
+	TeamLabelsPath    string
 }
 
 // Ensures that packageError implements failureObserver interface
@@ -79,7 +77,12 @@ func newPackageError(options packageErrorOptions) (*packageError, error) {
 	}
 
 	// Get Team:Labels to add to Github Issue Labels
-	ghTeamLabels, err := teamlabels.GetTeamLabels()
+	var ghTeamLabels map[string]string
+	if options.TeamLabelsPath != "" {
+		ghTeamLabels, err = teamlabels.GetTeamLabelsFromPath(options.TeamLabelsPath)
+	} else {
+		ghTeamLabels, err = teamlabels.GetTeamLabels()
+	}
 	if err != nil {
 		fmt.Printf("Error while fetching team labels: %s", err)
 	}
