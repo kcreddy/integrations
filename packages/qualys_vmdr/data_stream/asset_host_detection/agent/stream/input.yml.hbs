@@ -26,19 +26,112 @@ redact:
   fields:
     - password
 program: |
-  state.with(
-    request("GET",
-      state.?want_more.orValue(false) ?
-        state.pagination_url
-      :
-        state.url.trim_right("/") + "/api/2.0/fo/asset/host/vm/detection/?" +
-        state.?params.orValue("").parse_query().with({
-          "action": ["list"],
-          "show_igs": [(state.show_igs? "1" : "0")],
-          "truncation_limit": [string(state.batch_size)],
-        }).format_query()
-    ).with({
-        "Header":{
+  (has(state.worklist) && size(state.worklist) > 0 
+  ?
+    state
+  :
+    state.with(
+      request("GET",
+        state.?want_more.orValue(false) ?
+          state.next_page.link
+        :
+          state.url.trim_right("/") + "/api/2.0/fo/asset/host/vm/detection/?" +
+          state.?params.orValue("").parse_query().with({
+            "action": ["list"],
+            "host_metadata": ["all"],
+            "show_qds": ["1"],
+            "show_qds_factors": ["1"],
+            "truncation_limit": [string(state.batch_size)],
+          }).format_query()
+      ).with({
+          "Header":{
+              "X-Requested-With": ["curl"],
+              "Authorization": ["Basic "+(state.user+":"+state.password).base64()],
+          }
+      }).do_request().as(resp,
+        resp.StatusCode == 200 
+        ?
+          (
+            has(resp.Body) && size(resp.Body) != 0
+            ?
+              (resp.Body.as(xml, try(xml.decode_xml('qualys_api_2_0_ahd'), "decode_xml_error_ahd").as(ahd_body, 
+                !has(ahd_body.decode_xml_error_ahd) 
+                ?
+                  (ahd_body.?doc.HOST_LIST_VM_DETECTION_OUTPUT.RESPONSE.hasValue() 
+                  ?
+                    ({
+                      "worklist": (
+                        ahd_body.?doc.HOST_LIST_VM_DETECTION_OUTPUT.RESPONSE.HOST_LIST.HOST.orValue([]).map(h,
+                          h.with({
+                            "HOST_QID_LIST": h.collate(DETECTION_LIST.DETECTION.QID),
+                          })
+                        ).flatten()
+                      ),
+                      "next_page": { 
+                        ?"link": ahd_body.?doc.HOST_LIST_VM_DETECTION_OUTPUT.RESPONSE.WARNING.URL
+                      },
+                      "next": 0,
+                    })
+                  :
+                    {
+                      "events": {
+                        "error": {
+                          "message": "xsd and response mismatch in ahd:" + (
+                            string(resp.Body)
+                          ),
+                        },
+                      },
+                      "want_more": false,
+                    }
+                  )
+                :
+                  {
+                    "events": {
+                      "error": {
+                        "message": "decode_xml error in ahd:" + string(ahd_body.decode_xml_error) + ":" + (
+                          string(resp.Body)
+                        ),
+                      },
+                    },
+                    "want_more": false,
+                  }
+              )))
+            :
+              // Qualys sends 200 success but with no response body. 
+              // Handling this case as okay.
+              {
+                "events": [],
+                "want_more": false,
+              }
+          )
+        :
+          ({
+            "events": {
+              "error": {
+                "code": string(resp.StatusCode),
+                "id": string(resp.Status),
+                "message": "GET:"+(
+                  size(resp.Body) != 0 ?
+                    string(resp.Body)
+                  :
+                    string(resp.Status) + ' (' + string(resp.StatusCode) + ')'
+                ),
+              },
+            },
+            "want_more": false,
+          })
+      )
+    )
+  ).as(state, state.with(
+    !has(state.worklist) ? state : 
+      size(state.worklist) > 0 ?
+        request("GET", state.url.trim_right("/") + "/api/2.0/fo/knowledge_base/vuln/?" +
+          {
+            "ids": [string(state.worklist[0].HOST_QID_LIST)],
+            "action": ["list"],
+          }.format_query()
+        ).with({
+          "Header":{
             "X-Requested-With": ["curl"],
             "Authorization": ["Basic "+(state.user+":"+state.password).base64()],
         }
@@ -50,28 +143,43 @@ program: |
           (resp.Body.as(xml, try(bytes(xml).decode_xml('qualys_api_2_0'), "decode_xml_error").as(body, 
             !has(body.decode_xml_error) 
             ?
-              (body.?doc.HOST_LIST_VM_DETECTION_OUTPUT.RESPONSE.hasValue() 
-              ?
-                ({
-                  "events": body.?doc.HOST_LIST_VM_DETECTION_OUTPUT.RESPONSE.HOST_LIST.HOST.orValue([]).map(h,
-                    h.DETECTION_LIST.DETECTION.map(v, {
-                      "message": h.with({"DETECTION_LIST": v}).encode_json(),
-                    })
-                  ).flatten(),
-                  ?"pagination_url": body.?doc.HOST_LIST_VM_DETECTION_OUTPUT.RESPONSE.WARNING.URL,
-                  "want_more": body.?doc.HOST_LIST_VM_DETECTION_OUTPUT.RESPONSE.WARNING.URL.hasValue(),
-                })
-              :
-                {
-                  "events": {
-                    "error": {
-                      "message": "xsd and response mismatch:" + (
-                          string(resp.Body)
-                      ),
-                    },
-                  },
-                  "want_more": false,
-                }
+              ({
+                "events": (
+                  has(kb_body.doc.KNOWLEDGE_BASE_VULN_LIST_OUTPUT.RESPONSE.VULN_LIST)
+                  ?
+                    kb_body.doc.KNOWLEDGE_BASE_VULN_LIST_OUTPUT.RESPONSE.VULN_LIST.VULN.map(e, e.with({
+                        "CVE_LIST": e.?CVE_LIST.CVE.orValue([]).map(c, c.ID),
+                    })).as(kb_list, kb_list[0]).as(kb, 
+                      state.worklist[0].DETECTION_LIST.DETECTION.map(v,
+                        state.worklist[0].with({
+                          "DETECTION_LIST": v,
+                        })
+                      )).flatten()
+                    
+                    
+                    [{
+                      "message": state.worklist[0].with({
+                        "KNOWLEDGE_BASE": kb,
+                      }).encode_json()
+                    }])
+                  :
+                    [{
+                      "message": state.worklist[0].with({
+                        "KNOWLEDGE_BASE": {
+                          "response_error": "response IDs values are missing: " + string(kb_body.?doc.KNOWLEDGE_BASE_VULN_LIST_OUTPUT.RESPONSE.ID_SET.orValue([])),
+                        }
+                      }).encode_json()
+                    }]
+                ),
+                "worklist": tail(state.worklist),
+                "want_more": has(state.?next_page.link),
+              }).as(to_publish, to_publish.with({
+                "want_more": to_publish.want_more || size(to_publish.worklist) != 0,
+              })).as(state, 
+                state.want_more && size(state.events) == 0 ?
+                  state.with({"events": [{"message": "want_more"}]})
+                :
+                  state
               )
             :
               {
