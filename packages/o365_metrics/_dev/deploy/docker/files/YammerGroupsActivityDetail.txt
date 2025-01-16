@@ -1,0 +1,3 @@
+Group Display Name,Group Type,Is Deleted,Last Activity Date,Liked Count,Member Count,Office 365 Connected,Owner Principal Name,Posted Count,Read Count,Report Period,﻿Report Refresh Date
+All Company,public,False,2024-12-23,1,2,Yes,,,,1,2024-12-23
+All Company,public,False,2024-12-25,1,2,Yes,,,,1,2024-12-25

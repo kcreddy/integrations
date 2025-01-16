@@ -1,0 +1,114 @@
+rules:
+  - path: /test-cel-tenant-id/oauth2/v2.0/token
+    methods: [POST]
+    query_params:
+      client_id: test-cel-client-id
+      client_secret: test-cel-client-secret
+      grant_type: client_credentials
+      scope: https://graph.microsoft.com/.default
+    request_headers:
+      Content-Type:
+        - "application/x-www-form-urlencoded"
+    responses:
+      - status_code: 200
+        headers:
+          Content-Type:
+            - "application/json"
+        body: |-
+          {"access_token": "GraphAPIToken","token_type": "Bearer","expires_in": 3600,"ext_expires_in": 3600}
+  - path: /reports/getTeamsUserActivityUserDetail(date={date}
+    methods: [GET]
+    request_headers:
+      Authorization:
+        - "Bearer GraphAPIToken"
+    responses:
+      - status_code: 302
+        headers:
+          Content-Type:
+            - "text/plain"
+          Location:
+            - http://svc-o365_metrics-cel:8080/locationTeamsUserActivityUserDetail
+        body: ""
+  - path: /locationTeamsUserActivityUserDetail
+    methods: [GET]
+    request_headers:
+      Authorization:
+        - "Bearer GraphAPIToken"
+    responses:
+      - status_code: 200
+        headers:
+          Content-Type:
+            - "application/octet-stream"
+        body: '{{file "/files/TeamsUserActivityUserDetail.txt"}}'
+  - path: /reports/getOffice365GroupsActivityDetail(date={date}
+    methods: [GET]
+    request_headers:
+      Authorization:
+        - "Bearer GraphAPIToken"
+    responses:
+      - status_code: 302
+        headers:
+          Content-Type:
+            - "text/plain"
+          Location:
+            - http://svc-o365_metrics-cel:8080/locationOffice365GroupsActivityDetail
+        body: ""
+  - path: /locationOffice365GroupsActivityDetail
+    methods: [GET]
+    request_headers:
+      Authorization:
+        - "Bearer GraphAPIToken"
+    responses:
+      - status_code: 200
+        headers:
+          Content-Type:
+            - "application/octet-stream"
+        body: '{{file "/files/Office365GroupsActivityDetail.txt"}}'
+  - path: /reports/getOneDriveUsageAccountDetail(date={date}
+    methods: [GET]
+    request_headers:
+      Authorization:
+        - "Bearer GraphAPIToken"
+    responses:
+      - status_code: 302
+        headers:
+          Content-Type:
+            - "text/plain"
+          Location:
+            - http://svc-o365_metrics-cel:8080/locationOneDriveUsageAccountDetail
+        body: ""
+  - path: /locationOneDriveUsageAccountDetail
+    methods: [GET]
+    request_headers:
+      Authorization:
+        - "Bearer GraphAPIToken"
+    responses:
+      - status_code: 200
+        headers:
+          Content-Type:
+            - "application/octet-stream"
+        body: '{{file "/files/OneDriveUsageAccountDetail.txt"}}'
+  - path: /reports/getYammerGroupsActivityDetail(date={date}
+    methods: [GET]
+    request_headers:
+      Authorization:
+        - "Bearer GraphAPIToken"
+    responses:
+      - status_code: 302
+        headers:
+          Content-Type:
+            - "text/plain"
+          Location:
+            - http://svc-o365_metrics-cel:8080/locationYammerGroupsActivityDetail
+        body: ""
+  - path: /locationYammerGroupsActivityDetail
+    methods: [GET]
+    request_headers:
+      Authorization:
+        - "Bearer GraphAPIToken"
+    responses:
+      - status_code: 200
+        headers:
+          Content-Type:
+            - "application/octet-stream"
+        body: '{{file "/files/YammerGroupsActivityDetail.txt"}}'

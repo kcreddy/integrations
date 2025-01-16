@@ -1,10 +1,33 @@
 {
     "@timestamp": "2024-12-23",
+    "agent": {
+        "ephemeral_id": "28d69167-0053-4d08-b4f1-0af61f882270",
+        "id": "24b403ee-2854-4c2b-acda-d9626a0851ea",
+        "name": "elastic-agent-18530",
+        "type": "filebeat",
+        "version": "8.16.0"
+    },
+    "data_stream": {
+        "dataset": "o365_metrics.onedrive_usage_account_detail",
+        "namespace": "11701",
+        "type": "metrics"
+    },
     "ecs": {
         "version": "8.16.0"
     },
+    "elastic_agent": {
+        "id": "24b403ee-2854-4c2b-acda-d9626a0851ea",
+        "snapshot": false,
+        "version": "8.16.0"
+    },
     "event": {
+        "agent_id_status": "verified",
+        "dataset": "o365_metrics.onedrive_usage_account_detail",
+        "ingested": "2025-01-16T20:12:37Z",
         "original": "{\"Active File Count\":\"1\",\"File Count\":\"7\",\"Is Deleted\":\"False\",\"Last Activity Date\":\"2024-12-23\",\"Owner Display Name\":\"ABC\",\"Owner Principal Name\":\"KR@abc.onmicrosoft.com\",\"Report Period\":\"1\",\"Site Id\":\"e1f0f31e-ba42-46a1-9f41-ef4849978cd8\",\"Site URL\":\"\",\"Storage Allocated (Byte)\":\"1099511627776\",\"Storage Used (Byte)\":\"1305970\",\"report\":{\"api_path\":\"/reports/getOneDriveUsageAccountDetail\",\"name\":\"OneDrive Usage Account Detail\"},\"﻿Report Refresh Date\":\"2024-12-23\"}"
+    },
+    "input": {
+        "type": "cel"
     },
     "o365": {
         "metrics": {
@@ -52,7 +75,9 @@
     },
     "tags": [
         "preserve_duplicate_custom_fields",
-        "preserve_original_event"
+        "preserve_original_event",
+        "forwarded",
+        "o365.metrics.onedrive.usage.account.detail"
     ],
     "user": {
         "email": "KR@abc.onmicrosoft.com",

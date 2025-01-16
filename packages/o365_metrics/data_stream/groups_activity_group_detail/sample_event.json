@@ -1,14 +1,37 @@
 {
     "@timestamp": "2024-12-24",
+    "agent": {
+        "ephemeral_id": "ce17466a-11bf-4466-84e0-97b2e73b37ba",
+        "id": "2686dba3-8af5-4fbf-a161-9435418023c5",
+        "name": "elastic-agent-50179",
+        "type": "filebeat",
+        "version": "8.16.0"
+    },
+    "data_stream": {
+        "dataset": "o365_metrics.groups_activity_group_detail",
+        "namespace": "80297",
+        "type": "metrics"
+    },
     "ecs": {
         "version": "8.16.0"
     },
+    "elastic_agent": {
+        "id": "2686dba3-8af5-4fbf-a161-9435418023c5",
+        "snapshot": false,
+        "version": "8.16.0"
+    },
     "event": {
+        "agent_id_status": "verified",
+        "dataset": "o365_metrics.groups_activity_group_detail",
+        "ingested": "2025-01-16T20:11:37Z",
         "original": "{\"Exchange Mailbox Storage Used (Byte)\":\"698640\",\"Exchange Mailbox Total Item Count\":\"9\",\"Exchange Received Email Count\":\"\",\"External Member Count\":\"0\",\"Group Display Name\":\"delete-1\",\"Group Id\":\"faa1ff4a-4677-4d4c-842a-dc63eb8b2ae3\",\"Group Type\":\"Private\",\"Is Deleted\":\"False\",\"Last Activity Date\":\"\",\"Member Count\":\"2\",\"Owner Principal Name\":\"AV@abc.onmicrosoft.com\",\"Report Period\":\"1\",\"SharePoint Active File Count\":\"\",\"SharePoint Site Storage Used (Byte)\":\"2029128\",\"SharePoint Total File Count\":\"6\",\"Yammer Liked Message Count\":\"\",\"Yammer Posted Message Count\":\"\",\"Yammer Read Message Count\":\"\",\"report\":{\"api_path\":\"/reports/getOffice365GroupsActivityDetail\",\"name\":\"Microsoft 365 Groups Activity Group Detail\"},\"﻿Report Refresh Date\":\"2024-12-24\"}"
     },
     "group": {
         "id": "faa1ff4a-4677-4d4c-842a-dc63eb8b2ae3",
         "name": "delete-1"
+    },
+    "input": {
+        "type": "cel"
     },
     "o365": {
         "metrics": {
@@ -62,7 +85,9 @@
     },
     "tags": [
         "preserve_duplicate_custom_fields",
-        "preserve_original_event"
+        "preserve_original_event",
+        "forwarded",
+        "o365.metrics.groups.activity.group.detail"
     ],
     "user": {
         "group": {

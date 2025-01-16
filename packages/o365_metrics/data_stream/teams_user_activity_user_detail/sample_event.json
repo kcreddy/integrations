@@ -1,16 +1,39 @@
 {
-    "@timestamp": "2024-12-15",
+    "@timestamp": "2024-12-16",
+    "agent": {
+        "ephemeral_id": "1dd44c84-eea9-45fe-946c-f366dc230b1b",
+        "id": "827c8a5c-78d8-456f-a5ef-7d994e6ac8be",
+        "name": "elastic-agent-57929",
+        "type": "filebeat",
+        "version": "8.16.0"
+    },
+    "data_stream": {
+        "dataset": "o365_metrics.teams_user_activity_user_detail",
+        "namespace": "89896",
+        "type": "metrics"
+    },
     "ecs": {
         "version": "8.16.0"
     },
+    "elastic_agent": {
+        "id": "827c8a5c-78d8-456f-a5ef-7d994e6ac8be",
+        "snapshot": false,
+        "version": "8.16.0"
+    },
     "event": {
-        "original": "{\"Ad Hoc Meetings Attended Count\":\"1\",\"Ad Hoc Meetings Organized Count\":\"2\",\"Assigned Products\":\"MICROSOFT 365 E5 DEVELOPER (WITHOUT WINDOWS AND AUDIO CONFERENCING)\",\"Audio Duration\":\"PT10S\",\"Audio Duration In Seconds\":\"10\",\"Call Count\":\"10\",\"Deleted Date\":\"\",\"Has Other Action\":\"No\",\"Is Deleted\":\"False\",\"Is Licensed\":\"Yes\",\"Last Activity Date\":\"\",\"Meeting Count\":\"10\",\"Meetings Attended Count\":\"1\",\"Meetings Organized Count\":\"2\",\"Post Messages\":\"100\",\"Private Chat Message Count\":\"1000\",\"Reply Messages\":\"123\",\"Report Period\":\"7\",\"Scheduled One-time Meetings Attended Count\":\"0\",\"Scheduled One-time Meetings Organized Count\":\"2\",\"Scheduled Recurring Meetings Attended Count\":\"3\",\"Scheduled Recurring Meetings Organized Count\":\"1\",\"Screen Share Duration\":\"PT5S\",\"Screen Share Duration In Seconds\":\"5\",\"Shared Channel Tenant Display Names\":\"Channel1\",\"Team Chat Message Count\":\"10\",\"Tenant Display Name\":\"MSFT\",\"Urgent Messages\":\"10\",\"User Id\":\"1345424e-c619-41d3-ab66-948ed302c504\",\"User Principal Name\":\"LH@abc.onmicrosoft.com\",\"Video Duration\":\"PT10S\",\"Video Duration In Seconds\":\"10\",\"Report Refresh Date\":\"2024-12-15\",\"report\": {\"api_path\":\"/reports/getTeamsUserActivityUserDetail\",\"name\":\"Microsoft Teams User Activity User Detail\"}}"
+        "agent_id_status": "verified",
+        "dataset": "o365_metrics.teams_user_activity_user_detail",
+        "ingested": "2025-01-16T20:13:35Z",
+        "original": "{\"Ad Hoc Meetings Attended Count\":\"15\",\"Ad Hoc Meetings Organized Count\":\"152\",\"Assigned Products\":\"MICROSOFT 365\",\"Audio Duration\":\"PT0S\",\"Audio Duration In Seconds\":\"155\",\"Call Count\":\"1537\",\"Deleted Date\":\"\",\"Has Other Action\":\"No\",\"Is Deleted\":\"False\",\"Is Licensed\":\"Yes\",\"Last Activity Date\":\"\",\"Meeting Count\":\"115\",\"Meetings Attended Count\":\"151\",\"Meetings Organized Count\":\"105\",\"Post Messages\":\"15\",\"Private Chat Message Count\":\"159\",\"Reply Messages\":\"115\",\"Report Period\":\"7\",\"Report Refresh Date\":\"2024-12-16\",\"Scheduled One-time Meetings Attended Count\":\"15\",\"Scheduled One-time Meetings Organized Count\":\"135\",\"Scheduled Recurring Meetings Attended Count\":\"125\",\"Scheduled Recurring Meetings Organized Count\":\"15\",\"Screen Share Duration\":\"PT0S\",\"Screen Share Duration In Seconds\":\"156\",\"Shared Channel Tenant Display Names\":\"\",\"Team Chat Message Count\":\"15\",\"Tenant Display Name\":\"MSFT\",\"Urgent Messages\":\"151\",\"User Id\":\"81f03e25-e0ec-49ee-8f1f-8c3de75e430f\",\"User Principal Name\":\"HenriettaM@abc.onmicrosoft.com\",\"Video Duration\":\"PT0S\",\"Video Duration In Seconds\":\"105\",\"report\":{\"api_path\":\"/reports/getTeamsUserActivityUserDetail\",\"name\":\"Teams User Activity User Detail\"}}"
+    },
+    "input": {
+        "type": "cel"
     },
     "o365": {
         "metrics": {
             "report": {
                 "api_path": "/reports/getTeamsUserActivityUserDetail",
-                "name": "Microsoft Teams User Activity User Detail"
+                "name": "Teams User Activity User Detail"
             },
             "teams": {
                 "user": {
@@ -18,75 +41,74 @@
                         "user": {
                             "detail": {
                                 "ad_hoc_meetings_attended": {
-                                    "count": 1
+                                    "count": 15
                                 },
                                 "ad_hoc_meetings_organized": {
-                                    "count": 2
+                                    "count": 152
                                 },
-                                "assigned_products": "MICROSOFT 365 E5 DEVELOPER (WITHOUT WINDOWS AND AUDIO CONFERENCING)",
+                                "assigned_products": "MICROSOFT 365",
                                 "audio_duration": {
-                                    "formatted": "PT10S",
-                                    "seconds": 10
+                                    "formatted": "PT0S",
+                                    "seconds": 155
                                 },
                                 "call": {
-                                    "count": 10
+                                    "count": 1537
                                 },
                                 "has_other_action": "No",
                                 "is_deleted": false,
                                 "is_licensed": true,
                                 "meeting": {
-                                    "count": 10
+                                    "count": 115
                                 },
                                 "meetings_attended": {
-                                    "count": 1
+                                    "count": 151
                                 },
                                 "meetings_organized": {
-                                    "count": 2
+                                    "count": 105
                                 },
                                 "post_messages": {
-                                    "count": 100
+                                    "count": 15
                                 },
                                 "private_chat_message": {
-                                    "count": 1000
+                                    "count": 159
                                 },
                                 "reply_messages": {
-                                    "count": 123
+                                    "count": 115
                                 },
                                 "report": {
                                     "period": {
                                         "day": "7"
                                     },
-                                    "refresh_date": "2024-12-15"
+                                    "refresh_date": "2024-12-16"
                                 },
                                 "scheduled_one_time_meetings_attended": {
-                                    "count": 0
+                                    "count": 15
                                 },
                                 "scheduled_one_time_meetings_organized": {
-                                    "count": 2
+                                    "count": 135
                                 },
                                 "scheduled_recurring_meetings_attended": {
-                                    "count": 3
+                                    "count": 125
                                 },
                                 "scheduled_recurring_meetings_organized": {
-                                    "count": 1
+                                    "count": 15
                                 },
                                 "screen_share_duration": {
-                                    "formatted": "PT5S",
-                                    "seconds": 5
+                                    "formatted": "PT0S",
+                                    "seconds": 156
                                 },
-                                "shared_channel_tenant_display_names": "Channel1",
                                 "team_chat_message": {
-                                    "count": 10
+                                    "count": 15
                                 },
                                 "tenant_display_name": "MSFT",
                                 "urgent_messages": {
-                                    "count": 10
+                                    "count": 151
                                 },
-                                "user_id": "1345424e-c619-41d3-ab66-948ed302c504",
-                                "user_principal_name": "LH@abc.onmicrosoft.com",
+                                "user_id": "81f03e25-e0ec-49ee-8f1f-8c3de75e430f",
+                                "user_principal_name": "HenriettaM@abc.onmicrosoft.com",
                                 "video_duration": {
-                                    "formatted": "PT10S",
-                                    "seconds": 10
+                                    "formatted": "PT0S",
+                                    "seconds": 105
                                 }
                             }
                         }
@@ -97,17 +119,19 @@
     },
     "related": {
         "user": [
-            "1345424e-c619-41d3-ab66-948ed302c504",
-            "LH@abc.onmicrosoft.com"
+            "81f03e25-e0ec-49ee-8f1f-8c3de75e430f",
+            "HenriettaM@abc.onmicrosoft.com"
         ]
     },
     "tags": [
         "preserve_duplicate_custom_fields",
-        "preserve_original_event"
+        "preserve_original_event",
+        "forwarded",
+        "o365.metrics.teams.user.activity.user.detail"
     ],
     "user": {
-        "email": "LH@abc.onmicrosoft.com",
-        "id": "1345424e-c619-41d3-ab66-948ed302c504",
-        "name": "LH@abc.onmicrosoft.com"
+        "email": "HenriettaM@abc.onmicrosoft.com",
+        "id": "81f03e25-e0ec-49ee-8f1f-8c3de75e430f",
+        "name": "HenriettaM@abc.onmicrosoft.com"
     }
 }

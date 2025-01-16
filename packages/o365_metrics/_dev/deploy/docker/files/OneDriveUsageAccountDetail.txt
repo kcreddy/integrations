@@ -1,0 +1,3 @@
+Active File Count,File Count,Is Deleted,Last Activity Date,Owner Display Name,Owner Principal Name,Report Period,Site Id,Site URL,Storage Allocated (Byte),Storage Used (Byte),﻿Report Refresh Date
+1,7,False,2024-12-23,ABC,KR@abc.onmicrosoft.com,1,e1f0f31e-ba42-46a1-9f41-ef4849978cd8,,1099511627776,1305970,2024-12-23
+1,9,False,2024-12-23,ABC,AB@abc.onmicrosoft.com,1,e2f0f31e-ba42-46a1-9f41-ef4849978cd8,,1099511627776,1305970,2024-12-24
