@@ -61,9 +61,9 @@ program: |
                   ?
                     ({
                       "worklist": (
-                        ahd_body.?doc.HOST_LIST_VM_DETECTION_OUTPUT.RESPONSE.HOST_LIST.HOST.orValue([]).map(h,
+                        ahd_body.?doc.HOST_LIST_VM_DETECTION_OUTPUT.RESPONSE.HOST_LIST.HOST.orValue([]).map(h, 
                           h.with({
-                            "HOST_QID_LIST": h.collate(DETECTION_LIST.DETECTION.QID),
+                            "HOST_QID_LIST": h.DETECTION_LIST.collate("DETECTION.QID"),
                           })
                         ).flatten()
                       ),
@@ -88,7 +88,7 @@ program: |
                   {
                     "events": {
                       "error": {
-                        "message": "decode_xml error in ahd:" + string(ahd_body.decode_xml_error) + ":" + (
+                        "message": "decode_xml error in ahd:" + string(ahd_body.decode_xml_error_ahd) + ":" + (
                           string(resp.Body)
                         ),
                       },
@@ -127,7 +127,7 @@ program: |
       size(state.worklist) > 0 ?
         request("GET", state.url.trim_right("/") + "/api/2.0/fo/knowledge_base/vuln/?" +
           {
-            "ids": [string(state.worklist[0].HOST_QID_LIST)],
+            "ids": [state.worklist[0].HOST_QID_LIST.map(qid, string(qid)).join(",")],
             "action": ["list"],
           }.format_query()
         ).with({
@@ -149,19 +149,15 @@ program: |
                   ?
                     kb_body.doc.KNOWLEDGE_BASE_VULN_LIST_OUTPUT.RESPONSE.VULN_LIST.VULN.map(e, e.with({
                         "CVE_LIST": e.?CVE_LIST.CVE.orValue([]).map(c, c.ID),
-                    })).as(kb_list, kb_list[0]).as(kb, 
+                    })).as(kb_list, kb_list.map(k, k.QID).as(qids, zip(qids, kb_list)).as(kb_map,
                       state.worklist[0].DETECTION_LIST.DETECTION.map(v,
-                        state.worklist[0].with({
+                        state.worklist[0].drop("HOST_QID_LIST").with({
                           "DETECTION_LIST": v,
+                          "KNOWLEDGE_BASE": kb_map[v.QID],
                         })
-                      )).flatten()
-                    
-                    
-                    [{
-                      "message": state.worklist[0].with({
-                        "KNOWLEDGE_BASE": kb,
-                      }).encode_json()
-                    }])
+                      ))).flatten().map(e, 
+                        {"message": e.encode_json()}
+                      )
                   :
                     [{
                       "message": state.worklist[0].with({
@@ -185,7 +181,8 @@ program: |
               {
                 "events": {
                   "error": {
-                    "message": "decode_xml error:" + string(body.decode_xml_error) + ":" + (
+                    "message": "decode_xml error in kb:" + string(kb_body.decode_xml_error_kb) + ":" + (
+                      size(resp.Body) != 0 ?
                         string(resp.Body)
                     ),
                   },
