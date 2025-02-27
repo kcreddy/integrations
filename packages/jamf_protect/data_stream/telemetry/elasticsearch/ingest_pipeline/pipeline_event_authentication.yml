@@ -458,17 +458,33 @@ processors:
         target_field: process.code_signature.team_id
         ignore_missing: true
 
+    - convert:
+        field: jamf_protect.telemetry.event.authentication.data.od.instigator.codesigning_flags
+        type: string
+        ignore_missing: true
     - rename:
         field: jamf_protect.telemetry.event.authentication.data.od.instigator.codesigning_flags
         target_field: process.code_signature.flags
+        ignore_missing: true
+    - convert:
+        field: jamf_protect.telemetry.event.authentication.data.token.instigator.codesigning_flags
+        type: string
         ignore_missing: true
     - rename:
         field: jamf_protect.telemetry.event.authentication.data.token.instigator.codesigning_flags
         target_field: process.code_signature.flags
         ignore_missing: true
+    - convert:
+        field: jamf_protect.telemetry.event.authentication.data.touchid.instigator.codesigning_flags
+        type: string
+        ignore_missing: true
     - rename:
         field: jamf_protect.telemetry.event.authentication.data.touchid.instigator.codesigning_flags
         target_field: process.code_signature.flags
+        ignore_missing: true
+    - convert:
+        field: jamf_protect.telemetry.event.authentication.data.auto_unlock.instigator.codesigning_flags
+        type: string
         ignore_missing: true
     - rename:
         field: jamf_protect.telemetry.event.authentication.data.auto_unlock.instigator.codesigning_flags

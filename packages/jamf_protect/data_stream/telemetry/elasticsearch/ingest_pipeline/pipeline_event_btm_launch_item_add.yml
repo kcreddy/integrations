@@ -253,9 +253,17 @@ processors:
         field: jamf_protect.telemetry.event.btm_launch_item_add.instigator.team_id
         target_field: process.code_signature.team_id
         ignore_missing: true
+    - convert:
+        field: jamf_protect.telemetry.event.btm_launch_item_add.app.codesigning_flags
+        type: string
+        ignore_missing: true
     - rename:
         field: jamf_protect.telemetry.event.btm_launch_item_add.app.codesigning_flags
         target_field: process.code_signature.flags
+        ignore_missing: true
+    - convert:
+        field: jamf_protect.telemetry.event.btm_launch_item_add.instigator.codesigning_flags
+        type: string
         ignore_missing: true
     - rename:
         field: jamf_protect.telemetry.event.btm_launch_item_add.instigator.codesigning_flags

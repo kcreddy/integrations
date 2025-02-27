@@ -55,7 +55,7 @@
             },
             "process": {
                 "code_signature": {
-                    "flags": 570522369,
+                    "flags": "570522369",
                     "signing_id": "com.apple.loginwindow"
                 },
                 "endpoint_security_client": false,
@@ -171,7 +171,7 @@
             },
             "process": {
                 "code_signature": {
-                    "flags": 570522369,
+                    "flags": "570522369",
                     "signing_id": "com.apple.loginwindow"
                 },
                 "endpoint_security_client": false,
@@ -290,7 +290,7 @@
             },
             "process": {
                 "code_signature": {
-                    "flags": 570506001,
+                    "flags": "570506001",
                     "signing_id": "com.apple.pwpolicy"
                 },
                 "endpoint_security_client": false,
@@ -404,7 +404,7 @@
             },
             "process": {
                 "code_signature": {
-                    "flags": 570522385,
+                    "flags": "570522385",
                     "signing_id": "com.apple.sudo"
                 },
                 "command_line": "/usr/local/bin/protectctl",
@@ -532,7 +532,7 @@
                 ],
                 "args_count": 3,
                 "code_signature": {
-                    "flags": 570493697,
+                    "flags": "570493697",
                     "signing_id": "com.apple.zsh"
                 },
                 "endpoint_security_client": false,
@@ -670,7 +670,7 @@
             },
             "process": {
                 "code_signature": {
-                    "flags": 570506001,
+                    "flags": "570506001",
                     "signing_id": "com.apple.dscl"
                 },
                 "endpoint_security_client": false,
@@ -795,7 +795,7 @@
             },
             "process": {
                 "code_signature": {
-                    "flags": 570506001,
+                    "flags": "570506001",
                     "signing_id": "com.apple.dscl"
                 },
                 "endpoint_security_client": false,
@@ -916,7 +916,7 @@
             },
             "process": {
                 "code_signature": {
-                    "flags": 570522369,
+                    "flags": "570522369",
                     "signing_id": "com.apple.Users-Groups-Settings.extension"
                 },
                 "endpoint_security_client": false,
@@ -1032,7 +1032,7 @@
             },
             "process": {
                 "code_signature": {
-                    "flags": 570522369,
+                    "flags": "570522369",
                     "signing_id": "com.apple.Users-Groups-Settings.extension"
                 },
                 "endpoint_security_client": false,
@@ -1153,7 +1153,7 @@
             },
             "process": {
                 "code_signature": {
-                    "flags": 570506001,
+                    "flags": "570506001",
                     "signing_id": "com.apple.dscl"
                 },
                 "endpoint_security_client": false,
@@ -1274,7 +1274,7 @@
             },
             "process": {
                 "code_signature": {
-                    "flags": 570506001,
+                    "flags": "570506001",
                     "signing_id": "com.apple.dscl"
                 },
                 "endpoint_security_client": false,
@@ -1509,7 +1509,7 @@
             },
             "process": {
                 "code_signature": {
-                    "flags": 570522385,
+                    "flags": "570522385",
                     "signing_id": "com.apple.coreauthd"
                 },
                 "endpoint_security_client": false,
@@ -1624,7 +1624,7 @@
             },
             "process": {
                 "code_signature": {
-                    "flags": 570522369,
+                    "flags": "570522369",
                     "signing_id": "com.apple.loginwindow"
                 },
                 "endpoint_security_client": false,
@@ -1743,7 +1743,7 @@
             },
             "process": {
                 "code_signature": {
-                    "flags": 570522385,
+                    "flags": "570522385",
                     "signing_id": "com.apple.sshd"
                 },
                 "endpoint_security_client": false,
@@ -1862,7 +1862,7 @@
             },
             "process": {
                 "code_signature": {
-                    "flags": 570522385,
+                    "flags": "570522385",
                     "signing_id": "com.apple.login"
                 },
                 "endpoint_security_client": false,
@@ -1981,7 +1981,7 @@
             },
             "process": {
                 "code_signature": {
-                    "flags": 570522385,
+                    "flags": "570522385",
                     "signing_id": "com.apple.login"
                 },
                 "endpoint_security_client": false,
@@ -2098,7 +2098,7 @@
             },
             "process": {
                 "code_signature": {
-                    "flags": 570522369,
+                    "flags": "570522369",
                     "signing_id": "com.apple.XProtectFramework.plugins.KeySteal"
                 },
                 "endpoint_security_client": false,
@@ -2229,7 +2229,7 @@
             },
             "process": {
                 "code_signature": {
-                    "flags": 570522369,
+                    "flags": "570522369",
                     "signing_id": "com.apple.XprotectFramework.AnalysisService"
                 },
                 "endpoint_security_client": false,
@@ -2372,7 +2372,7 @@
                 ],
                 "args_count": 1,
                 "code_signature": {
-                    "flags": 570522385,
+                    "flags": "570522385",
                     "signing_id": "com.apple.su"
                 },
                 "endpoint_security_client": false,
@@ -2534,7 +2534,7 @@
             },
             "process": {
                 "code_signature": {
-                    "flags": 570522385,
+                    "flags": "570522385",
                     "signing_id": "com.apple.screensharing.daemon"
                 },
                 "endpoint_security_client": false,
@@ -2652,7 +2652,7 @@
             },
             "process": {
                 "code_signature": {
-                    "flags": 570522369,
+                    "flags": "570522369",
                     "signing_id": "com.apple.kernelmanagerd"
                 },
                 "endpoint_security_client": false,
@@ -2779,7 +2779,7 @@
             },
             "process": {
                 "code_signature": {
-                    "flags": 570522369,
+                    "flags": "570522369",
                     "signing_id": "com.apple.mdmclient"
                 },
                 "endpoint_security_client": false,
@@ -2893,7 +2893,7 @@
             },
             "process": {
                 "code_signature": {
-                    "flags": 570506001,
+                    "flags": "570506001",
                     "signing_id": "com.apple.sntp"
                 },
                 "endpoint_security_client": false,
@@ -3016,7 +3016,7 @@
             },
             "process": {
                 "code_signature": {
-                    "flags": 570503953,
+                    "flags": "570503953",
                     "signing_id": "com.txhaflaire.JamfCheck",
                     "team_id": "CLQKFNPCCP"
                 },
@@ -3140,7 +3140,7 @@
             },
             "process": {
                 "code_signature": {
-                    "flags": 570522369,
+                    "flags": "570522369",
                     "signing_id": "com.apple.backgroundtaskmanagementd"
                 },
                 "endpoint_security_client": false,
@@ -3318,7 +3318,7 @@
             },
             "process": {
                 "code_signature": {
-                    "flags": 570522369,
+                    "flags": "570522369",
                     "signing_id": "com.apple.dirhelper"
                 },
                 "endpoint_security_client": false,
@@ -3435,7 +3435,7 @@
             },
             "process": {
                 "code_signature": {
-                    "flags": 570522369,
+                    "flags": "570522369",
                     "signing_id": "com.apple.mount_apfs"
                 },
                 "endpoint_security_client": false,
@@ -3902,7 +3902,7 @@
             },
             "process": {
                 "code_signature": {
-                    "flags": 570522369,
+                    "flags": "570522369",
                     "signing_id": "com.apple.syspolicyd"
                 },
                 "endpoint_security_client": false,

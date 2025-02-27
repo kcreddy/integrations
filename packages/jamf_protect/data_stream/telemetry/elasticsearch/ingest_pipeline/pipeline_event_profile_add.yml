@@ -173,6 +173,10 @@ processors:
         field: jamf_protect.telemetry.event.profile_add.instigator.team_id
         target_field: process.code_signature.team_id
         ignore_missing: true
+    - convert:
+        field: jamf_protect.telemetry.event.profile_add.instigator.codesigning_flags
+        type: string
+        ignore_missing: true
     - rename:
         field: jamf_protect.telemetry.event.profile_add.instigator.codesigning_flags
         target_field: process.code_signature.flags
