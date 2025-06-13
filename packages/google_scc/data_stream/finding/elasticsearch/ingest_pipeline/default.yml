@@ -1613,6 +1613,24 @@ processors:
       target_field: google_scc.finding.resource.display_name
       tag: rename_resource_displayName
       ignore_missing: true
+  - rename:
+      field: json.resource.type
+      target_field: google_scc.finding.resource.type
+      tag: rename_resource_type
+      ignore_missing: true
+  - rename:
+      field: json.resource.name
+      target_field: google_scc.finding.resource.name
+      tag: rename_resource_name
+      ignore_missing: true
+  - rename:
+      field: json.resource.cloudProvider
+      target_field: google_scc.finding.resource.cloud_provider
+      tag: rename_resource_cloud_provider
+      ignore_missing: true
+  # GCP meta fields namely - projectName,projectDisplayName,parentName,parentDisplayName,folders,cloudProvider,organization 
+  # are inside "resource" field in v1 API. 
+  # Copy them into "google_scc.finding.gcp_metadata" to conform with v2 API.
   - foreach:
       field: json.resource.folders
       if: ctx.json?.resource?.folders instanceof List
@@ -1635,53 +1653,85 @@ processors:
           ignore_missing: true
   - rename:
       field: json.resource.folders
-      target_field: google_scc.finding.resource.folders
+      target_field: google_scc.finding.resource.gcp_metadata.folders
       tag: rename_resource_folders
       ignore_missing: true
   - rename:
-      field: json.finding.resourceName
-      target_field: google_scc.finding.resource_name
-      tag: rename_finding_resourceName
-      ignore_missing: true
-  - rename:
-      field: json.resource.name
-      target_field: google_scc.finding.resource.name
-      tag: rename_resource_name
-      ignore_missing: true
-  - rename:
       field: json.resource.parentDisplayName
-      target_field: google_scc.finding.resource.parent.display_name
+      target_field: google_scc.finding.resource.gcp_metadata.parent.display_name
       tag: rename_resource_parentDisplayName
       ignore_missing: true
   - rename:
       field: json.resource.parentName
-      target_field: google_scc.finding.resource.parent.name
+      target_field: google_scc.finding.resource.gcp_metadata.parent.name
       tag: rename_resource_parentName
       ignore_missing: true
   - rename:
-      field: json.resource.parent
-      target_field: google_scc.finding.resource.parent.name
-      tag: rename_resource_parent
-      ignore_missing: true
-  - rename:
       field: json.resource.projectDisplayName
-      target_field: google_scc.finding.resource.project.display_name
+      target_field: google_scc.finding.resource.gcp_metadata.project.display_name
       tag: rename_resource_projectDisplayName
       ignore_missing: true
   - rename:
       field: json.resource.projectName
-      target_field: google_scc.finding.resource.project.name
+      target_field: google_scc.finding.resource.gcp_metadata.project.name
       tag: rename_resource_projectName
       ignore_missing: true
   - rename:
-      field: json.resource.project
-      target_field: google_scc.finding.resource.project.name
-      tag: rename_resource_project
+      field: json.resource.organization
+      target_field: google_scc.finding.resource.gcp_metadata.organization
+      tag: rename_resource_organization
+      ignore_missing: true
+  # GCP meta fields namely - projectName,projectDisplayName,parentName,parentDisplayName,folders,cloudProvider,organization 
+  # are moved into "resource.gcpMetadata" field in v2 API. Rename them into "google_scc.finding.gcp_metadata".
+  - foreach:
+      field: json.resource.gcpMetadata.folders
+      if: ctx.json?.resource?.gcpMetadata?.folders instanceof List
+      ignore_failure: true
+      processor:
+        rename:
+          field: _ingest._value.resourceFolderDisplayName
+          target_field: _ingest._value.display_name
+          tag: rename_resourceFolderDisplayName
+          ignore_missing: true
+  - foreach:
+      field: json.resource.gcpMetadata.folders
+      if: ctx.json?.resource?.gcpMetadata?.folders instanceof List
+      ignore_failure: true
+      processor:
+        rename:
+          field: _ingest._value.resourceFolder
+          target_field: _ingest._value.name
+          tag: rename_resourceFolder
+          ignore_missing: true
+  - rename:
+      field: json.resource.gcpMetadata.folders
+      target_field: google_scc.finding.resource.gcp_metadata.folders
+      tag: rename_gcpMetadata_folders
       ignore_missing: true
   - rename:
-      field: json.resource.type
-      target_field: google_scc.finding.resource.type
-      tag: rename_resource_type
+      field: json.resource.gcpMetadata.parentDisplayName
+      target_field: google_scc.finding.resource.gcp_metadata.parent.display_name
+      tag: rename_gcpMetadata_parentDisplayName
+      ignore_missing: true
+  - rename:
+      field: json.resource.gcpMetadata.parentName
+      target_field: google_scc.finding.resource.gcp_metadata.parent.name
+      tag: rename_gcpMetadata_parentName
+      ignore_missing: true
+  - rename:
+      field: json.resource.gcpMetadata.projectDisplayName
+      target_field: google_scc.finding.resource.gcp_metadata.project.display_name
+      tag: rename_gcpMetadata_projectDisplayName
+      ignore_missing: true
+  - rename:
+      field: json.resource.gcpMetadata.projectName
+      target_field: google_scc.finding.resource.gcp_metadata.project.name
+      tag: rename_gcpMetadata_projectName
+      ignore_missing: true
+  - rename:
+      field: json.resource.gcpMetadata.organization
+      target_field: google_scc.finding.resource.gcp_metadata.organization
+      tag: rename_resource_organization
       ignore_missing: true
   - rename:
       field: json.finding.securityMarks.canonicalName
