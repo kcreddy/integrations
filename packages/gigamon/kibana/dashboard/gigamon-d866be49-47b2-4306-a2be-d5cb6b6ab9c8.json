@@ -1,17 +1,5 @@
 {
     "attributes": {
-        "controlGroupInput": {
-            "chainingSystem": "HIERARCHICAL",
-            "controlStyle": "oneLine",
-            "ignoreParentSettingsJSON": {
-                "ignoreFilters": false,
-                "ignoreQuery": false,
-                "ignoreTimerange": false,
-                "ignoreValidations": false
-            },
-            "panelsJSON": {},
-            "showApplySelections": false
-        },
         "description": "Shining a light on Client browsers, Server Software, http versions, http methods, URLs, error codes etc",
         "kibanaSavedObjectMeta": {
             "searchSourceJSON": {
@@ -2821,5 +2809,5 @@
         }
     ],
     "type": "dashboard",
-    "typeMigrationVersion": "10.2.0"
+    "typeMigrationVersion": "8.9.0"
 }

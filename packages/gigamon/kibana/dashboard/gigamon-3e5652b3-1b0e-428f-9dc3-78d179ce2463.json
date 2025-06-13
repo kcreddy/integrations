@@ -1,17 +1,5 @@
 {
     "attributes": {
-        "controlGroupInput": {
-            "chainingSystem": "HIERARCHICAL",
-            "controlStyle": "oneLine",
-            "ignoreParentSettingsJSON": {
-                "ignoreFilters": false,
-                "ignoreQuery": false,
-                "ignoreTimerange": false,
-                "ignoreValidations": false
-            },
-            "panelsJSON": {},
-            "showApplySelections": false
-        },
         "description": "",
         "kibanaSavedObjectMeta": {
             "searchSourceJSON": {
@@ -1424,5 +1412,5 @@
         }
     ],
     "type": "dashboard",
-    "typeMigrationVersion": "10.2.0"
+    "typeMigrationVersion": "8.9.0"
 }

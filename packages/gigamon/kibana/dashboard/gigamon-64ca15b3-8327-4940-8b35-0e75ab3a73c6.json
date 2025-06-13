@@ -1,17 +1,5 @@
 {
     "attributes": {
-        "controlGroupInput": {
-            "chainingSystem": "HIERARCHICAL",
-            "controlStyle": "oneLine",
-            "ignoreParentSettingsJSON": {
-                "ignoreFilters": false,
-                "ignoreQuery": false,
-                "ignoreTimerange": false,
-                "ignoreValidations": false
-            },
-            "panelsJSON": {},
-            "showApplySelections": false
-        },
         "description": "Comparing strings using a variety of techniques to determine if a deceptive or malicious string is being presented to a user.",
         "kibanaSavedObjectMeta": {
             "searchSourceJSON": {
@@ -500,5 +488,5 @@
         }
     ],
     "type": "dashboard",
-    "typeMigrationVersion": "10.2.0"
+    "typeMigrationVersion": "8.9.0"
 }
