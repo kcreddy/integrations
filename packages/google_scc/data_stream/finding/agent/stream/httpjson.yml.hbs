@@ -19,7 +19,7 @@ request.ssl: {{ssl}}
 {{#if http_client_timeout}}
 request.timeout: {{http_client_timeout}}
 {{/if}}
-request.url: {{url}}/v1/{{parent_type}}/{{id}}/sources/-/findings
+request.url: {{url}}/v2/{{parent_type}}/{{id}}/sources/-/findings
 request.transforms:
   - set:
       target: url.params.pageSize
