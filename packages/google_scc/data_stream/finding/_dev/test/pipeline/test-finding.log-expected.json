@@ -44,6 +44,7 @@
                     },
                     "severity": "CRITICAL",
                     "source_id": "98481484454154454545",
+                    "source_properties": {},
                     "state": "ACTIVE"
                 }
             },
@@ -57,7 +58,162 @@
             "url": {
                 "domain": "www.adwait.com",
                 "original": "http://www.adwait.com",
+                "path": "",
                 "scheme": "http"
+            }
+        },
+        {
+            "@timestamp": "2025-06-13T10:23:00.505Z",
+            "ecs": {
+                "version": "8.11.0"
+            },
+            "error": {
+                "message": [
+                    "Processor convert with tag convert_file_size_to_long in pipeline default-1749813844365020000 failed with message: For input string: \"\""
+                ]
+            },
+            "event": {
+                "category": [
+                    "vulnerability"
+                ],
+                "created": "2025-06-13T10:23:01.585Z",
+                "kind": "pipeline_error",
+                "original": "{\"finding\":{\"canonicalName\":\"projects/111111111111/sources/2222222222222222/locations/global/findings/9768cdc905136b789c31a99ebf2cc695\",\"category\":\"OS_VULNERABILITY\",\"contacts\":{\"security\":{\"contacts\":[{\"email\":\"user@company.co\"}]}},\"createTime\":\"2025-06-13T10:23:01.585Z\",\"description\":\"A flaw was found in libxml2's xmlBuildQName function, where integer overflows in buffer size calculations can lead to a stack-based buffer overflow. This issue can result in memory corruption or a denial of service when processing crafted input.\",\"eventTime\":\"2025-06-13T10:23:00.505Z\",\"files\":[{\"diskPath\":{\"partitionUuid\":\"d93392c2-f9f4-48b6-915c-de0b168c4ed2\",\"relativePath\":\"var/lib/dpkg/status\"}}],\"findingClass\":\"VULNERABILITY\",\"mute\":\"UNDEFINED\",\"muteInfo\":{\"staticMute\":{\"applyTime\":\"1970-01-01T00:00:00Z\",\"state\":\"UNDEFINED\"}},\"muteUpdateTime\":\"1970-01-01T00:00:00Z\",\"name\":\"organizations/1000000000/sources/2222222222222222/locations/global/findings/9768cdc905136b789c31a99ebf2cc695\",\"parent\":\"organizations/1000000000/sources/2222222222222222/locations/global\",\"parentDisplayName\":\"Vulnerability Assessment\",\"resourceName\":\"//compute.googleapis.com/projects/project-name/zones/us-central1-c/instances/1c5b-ceb-12-031\",\"securityMarks\":{\"name\":\"organizations/1000000000/sources/2222222222222222/locations/global/findings/9768cdc905136b789c31a99ebf2cc695/securityMarks\"},\"severity\":\"HIGH\",\"state\":\"ACTIVE\",\"vulnerability\":{\"cve\":{\"cvssv3\":{\"attackComplexity\":\"ATTACK_COMPLEXITY_LOW\",\"attackVector\":\"ATTACK_VECTOR_NETWORK\",\"availabilityImpact\":\"IMPACT_HIGH\",\"baseScore\":7.5,\"confidentialityImpact\":\"IMPACT_NONE\",\"integrityImpact\":\"IMPACT_NONE\",\"privilegesRequired\":\"PRIVILEGES_REQUIRED_NONE\",\"scope\":\"SCOPE_UNCHANGED\",\"userInteraction\":\"USER_INTERACTION_NONE\"},\"exploitReleaseDate\":\"1970-01-01T00:00:00Z\",\"exploitationActivity\":\"NO_KNOWN\",\"firstExploitationDate\":\"1970-01-01T00:00:00Z\",\"id\":\"CVE-2025-6021\",\"impact\":\"LOW\",\"references\":[{\"source\":\"More Info\",\"uri\":\"https://access.redhat.com/security/cve/CVE-2025-6021\"},{\"source\":\"More Info\",\"uri\":\"https://security-tracker.debian.org/tracker/CVE-2025-6021\"}]},\"fixedPackage\":{\"cpeUri\":\"cpe:/o:debian:debian_linux:12\",\"packageName\":\"libxml2\",\"packageType\":\"OS\"},\"offendingPackage\":{\"cpeUri\":\"cpe:/o:debian:debian_linux:12\",\"packageName\":\"libxml2\",\"packageType\":\"OS\",\"packageVersion\":\"2.9.14+dfsg-1.3~deb12u1\"},\"securityBulletin\":{\"submissionTime\":\"1970-01-01T00:00:00Z\"}}},\"resource\":{\"cloudProvider\":\"GOOGLE_CLOUD_PLATFORM\",\"displayName\":\"1c5b-ceb-12-031\",\"gcpMetadata\":{\"folders\":[{\"resourceFolder\":\"//cloudresourcemanager.googleapis.com/folders/111111\",\"resourceFolderDisplayName\":\"Security\"},{\"resourceFolder\":\"//cloudresourcemanager.googleapis.com/folders/2222222\",\"resourceFolderDisplayName\":\"Engineering\"},{\"resourceFolder\":\"//cloudresourcemanager.googleapis.com/folders/3333333\",\"resourceFolderDisplayName\":\"Research and Development\"}],\"organization\":\"organizations/1000000000\",\"parent\":\"//cloudresourcemanager.googleapis.com/projects/111111111111\",\"parentDisplayName\":\"project-name\",\"project\":\"//cloudresourcemanager.googleapis.com/projects/111111111111\",\"projectDisplayName\":\"project-name\"},\"location\":\"us-central1-c\",\"name\":\"//compute.googleapis.com/projects/project-name/zones/us-central1-c/instances/1c5b-ceb-12-031\",\"resourcePath\":{\"nodes\":[{\"displayName\":\"project-name\",\"id\":\"projects/111111111111\",\"nodeType\":\"GCP_PROJECT\"},{\"displayName\":\"Security\",\"id\":\"folders/1111111\",\"nodeType\":\"GCP_FOLDER\"},{\"displayName\":\"Engineering\",\"id\":\"folders/22222222\",\"nodeType\":\"GCP_FOLDER\"},{\"displayName\":\"Research and Development\",\"id\":\"folders/33333333\",\"nodeType\":\"GCP_FOLDER\"},{\"id\":\"organizations/1000000000\",\"nodeType\":\"GCP_ORGANIZATION\"}]},\"resourcePathString\":\"organizations/1000000000/folders/33333333/folders/22222222/folders/1111111/projects/111111111111\",\"service\":\"compute.googleapis.com\",\"type\":\"google.compute.Instance\"}}",
+                "type": [
+                    "info"
+                ]
+            },
+            "file": {
+                "hash": {
+                    "sha256": [
+                        ""
+                    ]
+                },
+                "path": [
+                    ""
+                ],
+                "size": [
+                    ""
+                ]
+            },
+            "google_scc": {
+                "finding": {
+                    "canonical_name": "projects/111111111111/sources/2222222222222222/locations/global/findings/9768cdc905136b789c31a99ebf2cc695",
+                    "category": "OS_VULNERABILITY",
+                    "class": "VULNERABILITY",
+                    "contacts": {
+                        "security": [
+                            {
+                                "email": "user@company.co"
+                            }
+                        ]
+                    },
+                    "create_time": "2025-06-13T10:23:01.585Z",
+                    "description": "A flaw was found in libxml2's xmlBuildQName function, where integer overflows in buffer size calculations can lead to a stack-based buffer overflow. This issue can result in memory corruption or a denial of service when processing crafted input.",
+                    "event_time": "2025-06-13T10:23:00.505Z",
+                    "files": [
+                        {
+                            "diskPath": {
+                                "partitionUuid": "d93392c2-f9f4-48b6-915c-de0b168c4ed2",
+                                "relativePath": "var/lib/dpkg/status"
+                            }
+                        }
+                    ],
+                    "mute": {
+                        "state": "UNDEFINED",
+                        "update_time": "1970-01-01T00:00:00.000Z"
+                    },
+                    "name": "organizations/1000000000/sources/2222222222222222/locations/global/findings/9768cdc905136b789c31a99ebf2cc695",
+                    "parent": "organizations/1000000000/sources/2222222222222222/locations/global",
+                    "parent_display_name": "Vulnerability Assessment",
+                    "resource": {
+                        "cloud_provider": "GOOGLE_CLOUD_PLATFORM",
+                        "display_name": "1c5b-ceb-12-031",
+                        "gcp_metadata": {
+                            "folders": [
+                                {
+                                    "display_name": "Security",
+                                    "name": "//cloudresourcemanager.googleapis.com/folders/111111"
+                                },
+                                {
+                                    "display_name": "Engineering",
+                                    "name": "//cloudresourcemanager.googleapis.com/folders/2222222"
+                                },
+                                {
+                                    "display_name": "Research and Development",
+                                    "name": "//cloudresourcemanager.googleapis.com/folders/3333333"
+                                }
+                            ],
+                            "organization": "organizations/1000000000",
+                            "parent": {
+                                "display_name": "project-name"
+                            },
+                            "project": {
+                                "display_name": "project-name"
+                            }
+                        },
+                        "name": "//compute.googleapis.com/projects/project-name/zones/us-central1-c/instances/1c5b-ceb-12-031",
+                        "type": "google.compute.Instance"
+                    },
+                    "resource_name": "//compute.googleapis.com/projects/project-name/zones/us-central1-c/instances/1c5b-ceb-12-031",
+                    "security_marks": {
+                        "name": "organizations/1000000000/sources/2222222222222222/locations/global/findings/9768cdc905136b789c31a99ebf2cc695/securityMarks"
+                    },
+                    "severity": "HIGH",
+                    "source_id": "2222222222222222/locations/global",
+                    "state": "ACTIVE",
+                    "vulnerability": {
+                        "cve": {
+                            "cvssv3": {
+                                "attack": {
+                                    "complexity": "ATTACK_COMPLEXITY_LOW",
+                                    "vector": "ATTACK_VECTOR_NETWORK"
+                                },
+                                "availability_impact": "IMPACT_HIGH",
+                                "base_score": 7.5,
+                                "confidentiality_impact": "IMPACT_NONE",
+                                "integrity_impact": "IMPACT_NONE",
+                                "privileges_required": "PRIVILEGES_REQUIRED_NONE",
+                                "scope": "SCOPE_UNCHANGED",
+                                "user_interaction": "USER_INTERACTION_NONE"
+                            },
+                            "id": "CVE-2025-6021",
+                            "references": [
+                                {
+                                    "source": "More Info",
+                                    "uri": "https://access.redhat.com/security/cve/CVE-2025-6021"
+                                },
+                                {
+                                    "source": "More Info",
+                                    "uri": "https://security-tracker.debian.org/tracker/CVE-2025-6021"
+                                }
+                            ]
+                        }
+                    }
+                }
+            },
+            "message": "A flaw was found in libxml2's xmlBuildQName function, where integer overflows in buffer size calculations can lead to a stack-based buffer overflow. This issue can result in memory corruption or a denial of service when processing crafted input.",
+            "organization": {
+                "id": "1000000000"
+            },
+            "related": {
+                "hash": [
+                    ""
+                ]
+            },
+            "tags": [
+                "preserve_original_event",
+                "preserve_duplicate_custom_fields"
+            ],
+            "vulnerability": {
+                "classification": "CVSS",
+                "enumeration": "CVE",
+                "id": "CVE-2025-6021",
+                "reference": "https://security-tracker.debian.org/tracker/CVE-2025-6021",
+                "score": {
+                    "base": 7.5,
+                    "version": "3.1"
+                }
             }
         },
         null
