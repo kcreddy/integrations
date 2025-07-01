@@ -1828,10 +1828,10 @@ processors:
         - append:
             field: error.message
             value: 'Processor {{{_ingest.on_failure_processor_type}}} with tag {{{_ingest.on_failure_processor_tag}}} in pipeline {{{_ingest.pipeline}}} failed with message: {{{_ingest.on_failure_message}}}'
-  - remove:
-      field: json
-      tag: remove_json
-      ignore_missing: true
+  # - remove:
+  #     field: json
+  #     tag: remove_json
+  #     ignore_missing: true
   - foreach:
       field: google_scc.finding.vulnerability.cve.references
       if: ctx.google_scc?.finding?.vulnerability?.cve?.references instanceof List && (ctx.tags == null || !(ctx.tags.contains('preserve_duplicate_custom_fields')))

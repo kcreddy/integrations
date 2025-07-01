@@ -753,7 +753,7 @@ An example event for `finding` looks as following:
 | google_scc.finding.vulnerability.cve.cvssv3.attack.complexity | This metric describes the conditions beyond the attacker's control that must exist in order to exploit the vulnerability. | keyword |
 | google_scc.finding.vulnerability.cve.cvssv3.attack.vector | Base Metrics Represents the intrinsic characteristics of a vulnerability that are constant over time and across user environments. This metric reflects the context by which vulnerability exploitation is possible. | keyword |
 | google_scc.finding.vulnerability.cve.cvssv3.availability_impact | This metric measures the impact to the availability of the impacted component resulting from a successfully exploited vulnerability. | keyword |
-| google_scc.finding.vulnerability.cve.cvssv3.base_score | The base score is a function of the base metric scores. | long |
+| google_scc.finding.vulnerability.cve.cvssv3.base_score | The base score is a function of the base metric scores. | double |
 | google_scc.finding.vulnerability.cve.cvssv3.confidentiality_impact | This metric measures the impact to the confidentiality of the information resources managed by a software component due to a successfully exploited vulnerability. | keyword |
 | google_scc.finding.vulnerability.cve.cvssv3.integrity_impact | This metric measures the impact to integrity of a successfully exploited vulnerability. | keyword |
 | google_scc.finding.vulnerability.cve.cvssv3.privileges_required | This metric describes the level of privileges an attacker must possess before successfully exploiting the vulnerability. | keyword |
