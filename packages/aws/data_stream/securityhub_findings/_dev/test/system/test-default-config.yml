@@ -3,10 +3,14 @@ service: securityhub
 vars:
   secret_access_key: xxxx
   access_key_id: xxxx
+  logging:
+    level: debug
 data_stream:
   vars:
     aws_region: xxxx
     tld: amazonaws.cn
+    filter_recordstate: '{"RecordState": [{"Comparison":"NOT_EQUALS","Value":"ARCHIVED"}]}'
+    filter_workflowstatus: '{"WorkflowStatus": [{"Comparison":"NOT_EQUALS","Value":"SUPPRESSED"}]}'
     preserve_original_event: true
     enable_request_tracer: true
     ssl: |
@@ -34,6 +38,6 @@ data_stream:
           NZJwli2WcEIuvEP2btR3aq3DSZiJwsgh3YaqA9GFv0e3A7rG5lUwaFFIhSFmNTUo
           QitGeqCxiwvdjD4d/jkyeG84779ewQQeYyxgOgvQaiS56a4DijLYkIU=
           -----END CERTIFICATE-----
-skip:
-  reason: "The fleet health status changes to degraded when the HTTPJSON template's value evaluation comes up empty, which leads to system test failures but does not interrupt the data flow."
-  link: https://github.com/elastic/beats/issues/45664
+# skip:
+#   reason: "The fleet health status changes to degraded when the HTTPJSON template's value evaluation comes up empty, which leads to system test failures but does not interrupt the data flow."
+#   link: https://github.com/elastic/beats/issues/45664

@@ -32,6 +32,18 @@ request.transforms:
       value: '[{ "Start": "[[formatDate (parseDate .cursor.last_execution_datetime "RFC3339") "2006-01-02T15"]]", "End": "[[formatDate (now) "2006-01-02T15"]]" }]'
       default: '[{ "Start": "[[formatDate (now (parseDuration "-{{initial_interval}}")) "2006-01-02T15"]]", "End": "[[formatDate (now) "2006-01-02T15"]]" }]'
       value_type: json
+{{#if filter_recordstate}}
+  - set:
+      target: body.Filters.RecordState
+      value: '{{filter_recordstate}}'
+      value_type: json
+{{/if}}
+{{#if filter_workflowstatus}}
+  - set:
+      target: body.Filters.WorkflowStatus
+      value: '{{filter_workflowstatus}}'
+      value_type: json
+{{/if}}
   - set:
       target: header.Authorization
       value: '[[$now := (now)]][[(sprintf "AWS4-HMAC-SHA256 Credential={{access_key_id}}/%s/{{aws_region}}/securityhub/aws4_request, SignedHeaders=host;x-amz-date, Signature=%s" (formatDate ($now) "20060102") (hmac "sha256" (hexDecode (hmac "sha256" (hexDecode (hmac "sha256" (hexDecode (hmac "sha256" (hexDecode (hmac "sha256" "AWS4{{secret_access_key}}" (formatDate ($now) "20060102"))) "{{aws_region}}")) "securityhub")) "aws4_request")) "AWS4-HMAC-SHA256\n" (formatDate ($now) "20060102T150405Z") "\n" (sprintf "%s/%s\n" (formatDate ($now) "20060102") "{{aws_region}}/securityhub/aws4_request") (hash "sha256" "POST\n" "/findings\n" "\n" "host:securityhub.{{aws_region}}.{{tld}}\n" (sprintf "x-amz-date:%s\n\n" (formatDate ($now) "20060102T150405Z")) "host;x-amz-date\n" (hash "sha256" (sprintf `%s` .body)))))]]'

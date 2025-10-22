@@ -1,6 +1,7 @@
 rules:
   - path: /findings
     methods: ["POST"]
+    # request_body: '{"MaxResults":"100","SortCriteria":"[{\"Field\":\"UpdatedAt\",\"SortOrder\":\"asc\"}]","method":"getPushEventSettings"}'
     responses:
       - status_code: 200
         body: |
