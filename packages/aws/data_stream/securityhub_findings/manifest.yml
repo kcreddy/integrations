@@ -51,20 +51,20 @@ streams:
         default: amazonaws.com
       - name: filter_recordstate
         type: text
-        title: RecordState Filter to AWS Security Hub Findings API.
-        description: RecordState Filter to apply when fetching AWS Security Hub Findings from AWS.
+        title: RecordState Filter.
+        description: 'RecordState Filter to apply when fetching AWS Security Hub Findings from AWS. Example `[{"Comparison":"NOT_EQUALS","Value":"ARCHIVED"}]`'
         multi: false
         required: false
-        default: |
-          # {"RecordState": [{"Comparison":"NOT_EQUALS","Value":"ARCHIVED"}]}
+        # default: |
+        #   # {"RecordState": [{"Comparison":"NOT_EQUALS","Value":"ARCHIVED"}]}
       - name: filter_workflowstatus
         type: text
-        title: WorkflowStatus Filter to AWS Security Hub Findings API.
-        description: WorkflowStatus Filter to apply when fetching AWS Security Hub Findings from AWS.
+        title: WorkflowStatus Filter.
+        description: 'WorkflowStatus Filter to apply when fetching AWS Security Hub Findings from AWS. Example `[{"Comparison":"NOT_EQUALS","Value":"SUPPRESSED"}]`'
         multi: false
         required: false
-        default: |
-          # {"WorkflowStatus": [{"Comparison":"NOT_EQUALS","Value":"SUPPRESSED"}]}
+        # default: |
+        #   # {"WorkflowStatus": [{"Comparison":"NOT_EQUALS","Value":"SUPPRESSED"}]}
       - name: proxy_url
         type: text
         title: Proxy URL
