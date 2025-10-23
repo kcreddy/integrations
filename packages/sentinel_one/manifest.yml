@@ -1,7 +1,7 @@
 format_version: "3.4.0"
 name: sentinel_one
 title: SentinelOne
-version: "1.41.0"
+version: "1.41.2"
 description: Collect logs from SentinelOne with Elastic Agent.
 type: integration
 categories:
@@ -58,7 +58,7 @@ policy_templates:
         team: security-service-integrations
     inputs:
       - type: cel
-        title: Collect SentinelOne logs via API (CEL)
+        title: Collect SentinelOne logs via API using CEL input
         description: Collecting SentinelOne logs via API.
         vars:
           - name: url
@@ -111,7 +111,7 @@ policy_templates:
               #    sxSmbIUfc2SGJGCJD4I=
               #    -----END CERTIFICATE-----
       - type: httpjson
-        title: Collect SentinelOne logs via API (HTTP JSON)
+        title: Collect SentinelOne logs via API using HTTP JSON input
         description: Collecting SentinelOne logs via API.
         vars:
           - name: url
