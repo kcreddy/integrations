@@ -1809,6 +1809,18 @@ processors:
       tag: rename_md5
       target_field: threat_connect.indicator.md5
       ignore_missing: true
+  - lowercase:
+      field: threat_connect.indicator.md5
+      tag: lowercase_threat_indicator_md5
+      target_field: threat_connect.indicator.md5
+      if: ctx._conf?.hash_case == 'lowercase'
+      ignore_missing: true
+  - uppercase:
+      field: threat_connect.indicator.md5
+      tag: uppercase_threat_indicator_md5
+      target_field: threat_connect.indicator.md5
+      if: ctx._conf?.hash_case == 'uppercase'
+      ignore_missing: true
   - set:
       field: threat.indicator.file.hash.md5
       tag: set_threat_indicator_file_hash_md5_from_indicator_md5
@@ -1939,6 +1951,18 @@ processors:
       tag: rename_sha1
       target_field: threat_connect.indicator.sha1
       ignore_missing: true
+  - lowercase:
+      field: threat_connect.indicator.sha1
+      tag: lowercase_threat_indicator_sha1
+      target_field: threat_connect.indicator.sha1
+      if: ctx._conf?.hash_case == 'lowercase'
+      ignore_missing: true
+  - uppercase:
+      field: threat_connect.indicator.sha1
+      tag: uppercase_threat_indicator_sha1
+      target_field: threat_connect.indicator.sha1
+      if: ctx._conf?.hash_case == 'uppercase'
+      ignore_missing: true
   - set:
       field: threat.indicator.file.hash.sha1
       tag: set_threat_indicator_file_hash_sha1_from_indicator_sha1
@@ -1955,6 +1979,18 @@ processors:
       field: json.sha256
       tag: rename_sha256
       target_field: threat_connect.indicator.sha256
+      ignore_missing: true
+  - lowercase:
+      field: threat_connect.indicator.sha256
+      tag: lowercase_threat_indicator_sha256
+      target_field: threat_connect.indicator.sha256
+      if: ctx._conf?.hash_case == 'lowercase'
+      ignore_missing: true
+  - uppercase:
+      field: threat_connect.indicator.sha256
+      tag: uppercase_threat_indicator_sha256
+      target_field: threat_connect.indicator.sha256
+      if: ctx._conf?.hash_case == 'uppercase'
       ignore_missing: true
   - set:
       field: threat.indicator.file.hash.sha256

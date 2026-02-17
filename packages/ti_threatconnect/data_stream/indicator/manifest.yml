@@ -72,6 +72,20 @@ streams:
         multi: false
         required: true
         show_user: true
+      - name: hash_case
+        title: Hash Case
+        show_user: true
+        multi: false
+        required: true
+        type: select
+        options:
+          - text: Lowercase
+            value: lowercase
+          - text: Uppercase
+            value: uppercase
+          - text: Keep Original Case
+            value: original
+        description: Converts all hashes to the specified case.
       - name: batch_size
         type: integer
         title: Batch Size
