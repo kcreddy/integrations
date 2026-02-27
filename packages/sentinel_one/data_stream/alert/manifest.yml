@@ -1,7 +1,8 @@
 title: Collect alert logs from SentinelOne
 type: logs
 streams:
-  - input: httpjson
+  - input: cel
+    migrate_from: httpjson
     title: Alert
     description: Collect alert logs from SentinelOne.
     template_path: httpjson.yml.hbs
