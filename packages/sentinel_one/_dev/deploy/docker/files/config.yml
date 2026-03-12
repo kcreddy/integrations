@@ -2,6 +2,9 @@ rules:
   - path: /web/api/v2.1/activities
     methods: ["GET"]
     query_params:
+      createdAt__gte: "{createdAt__gte:.*}"
+      limit: "100"
+      sortBy: createdAt
       sortOrder: asc
       cursor: efgh
     request_headers:
@@ -22,6 +25,9 @@ rules:
   - path: /web/api/v2.1/activities
     methods: ["GET"]
     query_params:
+      createdAt__gte: "{createdAt__gte:.*}"
+      limit: "100"
+      sortBy: createdAt
       sortOrder: asc
       cursor: abcd
     request_headers:
@@ -116,6 +122,9 @@ rules:
   - path: /web/api/v2.1/activities
     methods: ["GET"]
     query_params:
+      createdAt__gte: "{createdAt__gte:.*}"
+      limit: "100"
+      sortBy: createdAt
       sortOrder: asc
     request_headers:
       Authorization:

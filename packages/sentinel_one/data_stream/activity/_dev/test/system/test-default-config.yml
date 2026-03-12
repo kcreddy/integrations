@@ -1,4 +1,4 @@
-input: httpjson
+input: cel
 service: sentinel_one
 vars:
   url: http://{{Hostname}}:{{Port}}
