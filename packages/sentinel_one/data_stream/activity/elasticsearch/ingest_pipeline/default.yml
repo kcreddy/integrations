@@ -40,14 +40,14 @@ processors:
       field: event.original
       target_field: json
       ignore_failure: true
-  - fingerprint:
-      tag: fingerprint_ff462919
-      fields:
-        - json.createdAt
-        - json.updatedAt
-        - json.id
-      target_field: _id
-      ignore_missing: true
+#   - fingerprint:
+#       tag: fingerprint_ff462919
+#       fields:
+#         - json.createdAt
+#         - json.updatedAt
+#         - json.id
+#       target_field: _id
+#       ignore_missing: true
   - append:
       tag: append_event_category_a37bbda6
       field: event.category
