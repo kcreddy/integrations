@@ -1,4 +1,4 @@
-input: httpjson
+input: cel
 service: 1password_eventsapi_mock
 vars:
   url: http://{{Hostname}}:{{Port}}

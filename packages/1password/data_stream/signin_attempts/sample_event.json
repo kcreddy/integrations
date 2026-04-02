@@ -1,24 +1,24 @@
 {
     "@timestamp": "2021-08-11T14:28:03.000Z",
     "agent": {
-        "ephemeral_id": "ce227beb-fb58-4f3d-a379-0b3b0f163883",
-        "id": "bb785601-3e94-4772-8d05-48517f9740bc",
-        "name": "elastic-agent-11750",
+        "ephemeral_id": "6a78206d-b838-4888-ac7c-67a078d17f3d",
+        "id": "0f5da2a0-ca35-4146-a53c-9e68727fe508",
+        "name": "elastic-agent-56453",
         "type": "filebeat",
-        "version": "8.19.4"
+        "version": "9.4.0"
     },
     "data_stream": {
         "dataset": "1password.signin_attempts",
-        "namespace": "35031",
+        "namespace": "38126",
         "type": "logs"
     },
     "ecs": {
         "version": "8.11.0"
     },
     "elastic_agent": {
-        "id": "bb785601-3e94-4772-8d05-48517f9740bc",
+        "id": "0f5da2a0-ca35-4146-a53c-9e68727fe508",
         "snapshot": true,
-        "version": "8.19.4"
+        "version": "9.4.0"
     },
     "event": {
         "action": "success",
@@ -26,10 +26,11 @@
         "category": [
             "authentication"
         ],
-        "created": "2025-09-19T12:38:09.666Z",
+        "created": "2026-04-02T10:13:54.181Z",
         "dataset": "1password.signin_attempts",
-        "ingested": "2025-09-19T12:38:12Z",
+        "ingested": "2026-04-02T10:13:57Z",
         "kind": "event",
+        "module": "1password",
         "original": "{\"category\":\"success\",\"client\":{\"app_name\":\"1Password Browser Extension\",\"app_version\":\"1109\",\"ip_address\":\"1.1.1.1\",\"os_name\":\"Android\",\"os_version\":\"10\",\"platform_name\":\"Chrome\",\"platform_version\":\"93.0.4577.62\"},\"country\":\"AR\",\"details\":null,\"session_uuid\":\"UED4KFZ5BH37IQWTJ7LG4VPWK7\",\"target_user\":{\"email\":\"email@1password.com\",\"name\":\"Name\",\"uuid\":\"OJQGU46KAPROEJLCK674RHSAY5\"},\"timestamp\":\"2021-08-11T14:28:03Z\",\"type\":\"credentials_ok\",\"uuid\":\"HGIF4OEWXDTVWKEQDIWTKV26HU\"}",
         "outcome": "success",
         "type": [
@@ -43,7 +44,7 @@
         }
     },
     "input": {
-        "type": "httpjson"
+        "type": "cel"
     },
     "onepassword": {
         "client": {

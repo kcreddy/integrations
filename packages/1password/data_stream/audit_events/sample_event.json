@@ -1,24 +1,24 @@
 {
     "@timestamp": "2022-10-24T21:16:52.827Z",
     "agent": {
-        "ephemeral_id": "8addaae9-87b5-4f3b-b998-54a98b2586f5",
-        "id": "764d6ce1-2012-437a-a1e4-d6fc25cb83e6",
-        "name": "elastic-agent-26645",
+        "ephemeral_id": "254919bc-4388-4a3d-950b-9a57e788ffcf",
+        "id": "62faf00d-a36a-41d4-b459-311e8c457f23",
+        "name": "elastic-agent-35978",
         "type": "filebeat",
-        "version": "8.19.4"
+        "version": "9.4.0"
     },
     "data_stream": {
         "dataset": "1password.audit_events",
-        "namespace": "75533",
+        "namespace": "12128",
         "type": "logs"
     },
     "ecs": {
         "version": "8.11.0"
     },
     "elastic_agent": {
-        "id": "764d6ce1-2012-437a-a1e4-d6fc25cb83e6",
+        "id": "62faf00d-a36a-41d4-b459-311e8c457f23",
         "snapshot": true,
-        "version": "8.19.4"
+        "version": "9.4.0"
     },
     "event": {
         "action": "suspend",
@@ -26,24 +26,25 @@
         "category": [
             "configuration"
         ],
-        "created": "2025-09-19T12:36:31.698Z",
+        "created": "2026-04-02T09:19:01.650Z",
         "dataset": "1password.audit_events",
-        "ingested": "2025-09-19T12:36:34Z",
+        "ingested": "2026-04-02T09:19:04Z",
         "kind": "event",
+        "module": "1password",
         "original": "{\"action\":\"suspend\",\"actor_uuid\":\"GLF6WUEKS5CSNDJ2OG6TCZD3M4\",\"location\":{\"city\":\"Toronto\",\"country\":\"Canada\",\"latitude\":43.64,\"longitude\":-79.433,\"region\":\"Ontario\"},\"object_type\":\"user\",\"object_uuid\":\"ZRQCUD6A65AKHFETOUFO7NL4OM\",\"session\":{\"device_uuid\":\"rqtd557fn2husnstp5nc66w2xa\",\"ip\":\"89.160.20.156\",\"login_time\":\"2022-10-24T21:07:34.703106271Z\",\"uuid\":\"ODOHXUYQCJBUJKRGZNNPBJURPE\"},\"timestamp\":\"2022-10-24T21:16:52.827288935Z\",\"uuid\":\"3UQOGUC7DVOCN4OZP2MDKHFLSG\"}",
         "type": [
             "access"
         ]
     },
     "input": {
-        "type": "httpjson"
+        "type": "cel"
     },
     "onepassword": {
         "object_type": "user",
         "object_uuid": "ZRQCUD6A65AKHFETOUFO7NL4OM",
         "session": {
             "device_uuid": "rqtd557fn2husnstp5nc66w2xa",
-            "login_time": "2022-10-24T21:07:34.703106271Z",
+            "login_time": "2022-10-24T21:07:34.703Z",
             "uuid": "ODOHXUYQCJBUJKRGZNNPBJURPE"
         },
         "uuid": "3UQOGUC7DVOCN4OZP2MDKHFLSG"
@@ -70,8 +71,11 @@
             "country_iso_code": "SE",
             "country_name": "Sweden",
             "location": {
-                "lat": 58.4167,
-                "lon": 15.6167
+                "coordinates": [
+                    15.61669997870922,
+                    58.416699967347085
+                ],
+                "type": "Point"
             },
             "region_iso_code": "SE-E",
             "region_name": "Östergötland County"

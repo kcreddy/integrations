@@ -1,4 +1,10 @@
 # newer versions go on top
+- version: "50.0.0"
+  changes:
+    - description: |
+        Migrate audit events to new CEL-based using `migrate_from: httpjson`.
+      type: enhancement
+      link: https://github.com/elastic/integrations/pull/1
 - version: "1.34.0"
   changes:
     - description: Prevent updating fleet health status to degraded.

@@ -1,0 +1,81 @@
+config_version: 2
+interval: {{interval}}
+resource.tracer:
+  enabled: {{enable_request_tracer}}
+  filename: "../../logs/cel/http-request-trace-*.ndjson"
+  maxbackups: 5
+{{#if proxy_url}}
+resource.proxy_url: {{proxy_url}}
+{{/if}}
+{{#if ssl}}
+resource.ssl: {{ssl}}
+{{/if}}
+{{#if http_client_timeout}}
+resource.timeout: {{http_client_timeout}}
+{{/if}}
+resource.url: {{url}}
+state:
+  api_token: {{token}}
+  limit: {{limit}}
+redact:
+  fields:
+    - api_token
+program: |
+  state.with(
+    post_request(
+      state.url.trim_right("/") + "/api/v1/auditevents",
+      "application/json",
+      (
+        has(state.?cursor.last_cursor) && state.cursor.last_cursor != "" ?
+          {"cursor": state.cursor.last_cursor}
+        :
+          {"limit": state.limit}
+      ).encode_json()
+    ).with({
+      "Header": {
+        "Authorization": ["Bearer " + state.api_token],
+        "Content-Type": ["application/json"],
+        "User-Agent": ["1Password-Elastic-Filebeat/0.1.0"],
+      },
+    }).do_request().as(resp, resp.StatusCode == 200 ?
+      bytes(resp.Body).decode_json().as(body,
+        {
+          "events": body.?items.orValue([]).map(e, {"message": e.encode_json()}),
+          "cursor": {
+            "last_cursor": body.?cursor.orValue(""),
+          },
+          "want_more": body.?has_more.orValue(false),
+        }
+      )
+    :
+      {
+        "events": {
+          "error": {
+            "code": string(resp.StatusCode),
+            "id": string(resp.Status),
+            "message": "POST /api/v1/auditevents: " + (
+              size(resp.Body) != 0 ?
+                string(resp.Body)
+              :
+                string(resp.Status) + " (" + string(resp.StatusCode) + ")"
+            ),
+          },
+        },
+        "want_more": false,
+      }
+    )
+  )
+tags:
+{{#if preserve_original_event}}
+  - preserve_original_event
+{{/if}}
+{{#each tags as |tag|}}
+  - {{tag}}
+{{/each}}
+{{#contains "forwarded" tags}}
+publisher_pipeline.disable_host: true
+{{/contains}}
+{{#if processors}}
+processors:
+{{processors}}
+{{/if}}

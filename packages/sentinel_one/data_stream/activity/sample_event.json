@@ -1,35 +1,36 @@
 {
     "@timestamp": "2022-04-19T05:14:08.925Z",
     "agent": {
-        "ephemeral_id": "387e8cd8-1625-44fc-be9c-a1ff32a59043",
-        "id": "735a54fe-ead0-4e73-8294-cc72abebaac6",
-        "name": "elastic-agent-30231",
+        "ephemeral_id": "15400ada-457a-4a1f-9417-684e9d4b4b58",
+        "id": "bd1ed0b9-ebce-4c82-9b42-42926efb0945",
+        "name": "elastic-agent-96268",
         "type": "filebeat",
-        "version": "8.19.13"
+        "version": "9.4.0"
     },
     "data_stream": {
         "dataset": "sentinel_one.activity",
-        "namespace": "10967",
+        "namespace": "68426",
         "type": "logs"
     },
     "ecs": {
         "version": "9.3.0"
     },
     "elastic_agent": {
-        "id": "735a54fe-ead0-4e73-8294-cc72abebaac6",
-        "snapshot": false,
-        "version": "8.19.13"
+        "id": "bd1ed0b9-ebce-4c82-9b42-42926efb0945",
+        "snapshot": true,
+        "version": "9.4.0"
     },
     "event": {
         "agent_id_status": "verified",
         "category": [
             "configuration"
         ],
-        "created": "2026-03-23T06:36:42.764Z",
+        "created": "2026-04-01T12:59:11.218Z",
         "dataset": "sentinel_one.activity",
         "id": "1234567890123456789",
-        "ingested": "2026-03-23T06:36:45Z",
+        "ingested": "2026-04-01T12:59:14Z",
         "kind": "event",
+        "module": "sentinel_one",
         "original": "{\"accountId\":\"3214567890123456789\",\"accountName\":\"Default12\",\"activityType\":1234,\"agentId\":null,\"agentUpdatedVersion\":null,\"comments\":\"True\",\"createdAt\":\"2022-04-19T05:14:08.925421Z\",\"data\":{\"accountName\":\"Default\",\"byUser\":\"API\",\"fullScopeDetails\":\"Account Default\",\"fullScopeDetailsPath\":\"test/default\",\"groupName\":null,\"newValue\":true,\"role\":\"Level\",\"scopeLevel\":\"Account\",\"scopeName\":\"Default\",\"siteName\":null,\"userScope\":\"account\",\"username\":\"API\"},\"description\":\"API\",\"groupId\":null,\"groupName\":null,\"hash\":null,\"id\":\"1234567890123456789\",\"osFamily\":null,\"primaryDescription\":\"The management user API enabled Two factor authentication on the user API.\",\"secondaryDescription\":null,\"siteId\":null,\"siteName\":null,\"threatId\":null,\"updatedAt\":\"2022-04-18T05:14:08.922553Z\",\"userId\":\"1234567890123456789\"}",
         "type": [
             "info"

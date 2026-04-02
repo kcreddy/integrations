@@ -1,11 +1,12 @@
 title: "Collect 1Password audit events"
 type: logs
 streams:
-  - input: httpjson
+  - input: cel
     title: "Collect 1Password audit events"
     description: "Collect audit events from 1Password via the 1Password Events API"
     enabled: true
-    template_path: httpjson.yml.hbs
+    template_path: cel.yml.hbs
+    migrate_from: httpjson
     vars:
       - name: limit
         type: integer

@@ -37,7 +37,7 @@ policy_templates:
         division: engineering
         team: security-service-integrations
     inputs:
-      - type: httpjson
+      - type: cel
         title: Collect events from 1Password Events API
         description: Collect sign-in attempt, item usages, and audit events from 1Password via the 1Password Events API
         vars:
