@@ -4,8 +4,17 @@ vars:
   url: http://{{Hostname}}:{{Port}}
   token: --token--
   enable_request_tracer: true
+  logging:
+    level: debug
 data_stream:
   vars:
     preserve_original_event: true
+    interval: 30s
+    processors: |
+      - add_fields:
+          target: temp
+          fields:
+            name: myproject
+            id: '574734885120952459'
 assert:
   hit_count: 2
