@@ -1,5 +1,5 @@
 # newer versions go on top
-- version: "2.50.0"
+- version: "50.0.0"
   changes:
     - description: Migrate httpjson input to cel input for all data streams.
       type: enhancement
