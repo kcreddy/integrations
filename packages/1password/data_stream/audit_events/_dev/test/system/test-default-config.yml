@@ -9,7 +9,7 @@ vars:
 data_stream:
   vars:
     preserve_original_event: true
-    interval: 30s
+    interval: 1m
     processors: |
       - add_fields:
           target: temp

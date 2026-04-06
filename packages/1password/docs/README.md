@@ -299,24 +299,24 @@ An example event for `audit_events` looks as following:
 {
     "@timestamp": "2022-10-24T21:16:52.827Z",
     "agent": {
-        "ephemeral_id": "8addaae9-87b5-4f3b-b998-54a98b2586f5",
-        "id": "764d6ce1-2012-437a-a1e4-d6fc25cb83e6",
-        "name": "elastic-agent-26645",
+        "ephemeral_id": "429c8708-edb7-4868-bcc1-489cf1f2e36b",
+        "id": "30131e82-338a-4661-b1dd-65953e461587",
+        "name": "elastic-agent-80087",
         "type": "filebeat",
-        "version": "8.19.4"
+        "version": "9.4.0"
     },
     "data_stream": {
         "dataset": "1password.audit_events",
-        "namespace": "75533",
+        "namespace": "63193",
         "type": "logs"
     },
     "ecs": {
         "version": "8.11.0"
     },
     "elastic_agent": {
-        "id": "764d6ce1-2012-437a-a1e4-d6fc25cb83e6",
+        "id": "30131e82-338a-4661-b1dd-65953e461587",
         "snapshot": true,
-        "version": "8.19.4"
+        "version": "9.4.0"
     },
     "event": {
         "action": "suspend",
@@ -324,10 +324,11 @@ An example event for `audit_events` looks as following:
         "category": [
             "configuration"
         ],
-        "created": "2025-09-19T12:36:31.698Z",
+        "created": "2026-04-02T12:53:29.858Z",
         "dataset": "1password.audit_events",
-        "ingested": "2025-09-19T12:36:34Z",
+        "ingested": "2026-04-02T12:53:32Z",
         "kind": "event",
+        "module": "1password",
         "original": "{\"action\":\"suspend\",\"actor_uuid\":\"GLF6WUEKS5CSNDJ2OG6TCZD3M4\",\"location\":{\"city\":\"Toronto\",\"country\":\"Canada\",\"latitude\":43.64,\"longitude\":-79.433,\"region\":\"Ontario\"},\"object_type\":\"user\",\"object_uuid\":\"ZRQCUD6A65AKHFETOUFO7NL4OM\",\"session\":{\"device_uuid\":\"rqtd557fn2husnstp5nc66w2xa\",\"ip\":\"89.160.20.156\",\"login_time\":\"2022-10-24T21:07:34.703106271Z\",\"uuid\":\"ODOHXUYQCJBUJKRGZNNPBJURPE\"},\"timestamp\":\"2022-10-24T21:16:52.827288935Z\",\"uuid\":\"3UQOGUC7DVOCN4OZP2MDKHFLSG\"}",
         "type": [
             "access"
@@ -341,7 +342,7 @@ An example event for `audit_events` looks as following:
         "object_uuid": "ZRQCUD6A65AKHFETOUFO7NL4OM",
         "session": {
             "device_uuid": "rqtd557fn2husnstp5nc66w2xa",
-            "login_time": "2022-10-24T21:07:34.703106271Z",
+            "login_time": "2022-10-24T21:07:34.703Z",
             "uuid": "ODOHXUYQCJBUJKRGZNNPBJURPE"
         },
         "uuid": "3UQOGUC7DVOCN4OZP2MDKHFLSG"
@@ -368,8 +369,11 @@ An example event for `audit_events` looks as following:
             "country_iso_code": "SE",
             "country_name": "Sweden",
             "location": {
-                "lat": 58.4167,
-                "lon": 15.6167
+                "coordinates": [
+                    15.61669997870922,
+                    58.416699967347085
+                ],
+                "type": "Point"
             },
             "region_iso_code": "SE-E",
             "region_name": "Östergötland County"
