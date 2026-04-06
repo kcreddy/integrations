@@ -13,6 +13,9 @@ resource.ssl: {{ssl}}
 {{#if http_client_timeout}}
 resource.timeout: {{http_client_timeout}}
 {{/if}}
+{{#if retry_max_attempts}}
+resource.retry.max_attempts: {{retry_max_attempts}}
+{{/if}}
 resource.url: {{url}}
 state:
   want_more: false
