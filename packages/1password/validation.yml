@@ -3,3 +3,5 @@ errors:
     - SVR00002 # Mandatory filters in dashboards.
     - SVR00004 # References in dashboards.
     - SVR00005 # Kibana version for saved tags.
+    - SVR00009 # on_failure error.message must include "_ingest.pipeline"
+    - SVR00006 # Processors missing tags
