@@ -1,4 +1,9 @@
 # newer versions go on top
+- version: "2.50.0"
+  changes:
+    - description: Remove fingerprint processor in activity data stream to test migrate_from feature.
+      type: enhancement
+      link: https://github.com/elastic/integrations/pull/1
 - version: "2.6.0"
   changes:
     - description: Add ILM Policy for unified alert data stream.

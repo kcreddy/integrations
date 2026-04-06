@@ -3,9 +3,18 @@ service: sentinel_one
 vars:
   url: http://{{Hostname}}:{{Port}}
   api_token: xxxx
+  site_ids: 1,2,3
 data_stream:
   vars:
     preserve_original_event: true
     enable_request_tracer: true
+    interval: 1m
+    initial_interval: 2400h
+    processors: |
+      - add_fields:
+          target: temp
+          fields:
+            name: myproject
+            id: '574734885120952459'
 assert:
   hit_count: 4
