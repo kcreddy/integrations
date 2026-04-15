@@ -1,4 +1,4 @@
-input: httpjson
+input: cel
 service: m365-defender-alert-http
 vars:
   login_url: http://{{Hostname}}:{{Port}}

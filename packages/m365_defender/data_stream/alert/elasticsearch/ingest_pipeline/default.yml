@@ -56,15 +56,15 @@ processors:
       message: |
         There is an unexpected 'value' array with elements. 
         This indicates a misconfiguration of the input.
-  - fingerprint:
-      fields:
-        - json.id
-        - json.lastUpdateDateTime
-        - json.incidentId
-        - json.providerAlertId
-      tag: fingerprint_processor
-      target_field: _id
-      ignore_missing: true
+  # - fingerprint:
+  #     fields:
+  #       - json.id
+  #       - json.lastUpdateDateTime
+  #       - json.incidentId
+  #       - json.providerAlertId
+  #     tag: fingerprint_processor
+  #     target_field: _id
+  #     ignore_missing: true
   - script:
       lang: painless
       description: Drops empty string values recursively.

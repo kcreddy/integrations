@@ -1,10 +1,11 @@
 title: Collect Incident logs from Microsoft Defender XDR
 type: logs
 streams:
-  - input: httpjson
+  - input: cel
     title: Incidents
     description: "Collect Incidents from Microsoft Defender XDR. Recommended: Ingests correlated incidents including all associated alerts and evidence."
-    template_path: httpjson.yml.hbs
+    template_path: cel.yml.hbs
+    migrate_from: httpjson
     vars:
       - name: request_url
         type: text

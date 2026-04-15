@@ -1,0 +1,126 @@
+config_version: 2
+interval: {{interval}}
+resource.tracer:
+  enabled: {{enable_request_tracer}}
+  filename: "../../logs/cel/http-request-trace-*.ndjson"
+  maxbackups: 5
+{{#if proxy_url}}
+resource.proxy_url: {{proxy_url}}
+{{/if}}
+{{#if ssl}}
+resource.ssl: {{ssl}}
+{{/if}}
+{{#if http_client_timeout}}
+resource.timeout: {{http_client_timeout}}
+{{/if}}
+resource.url: {{request_url}}
+auth.oauth2:
+  client.id: {{client_id}}
+  client.secret: {{client_secret}}
+  token_url: {{login_url}}/{{tenant_id}}/{{token_endpoint}}
+  scopes:
+    - {{request_url}}/.default
+{{#if oauth_endpoint_params}}
+  endpoint_params: {{oauth_endpoint_params}}
+{{/if}}
+state:
+  initial_interval: {{initial_interval}}
+  batch_size: {{batch_size}}
+  include_alerts: {{include_alerts}}
+redact:
+  fields: ~
+program: |
+  state.with(
+    // On a fresh start (skip=0) compute filter_time from cursor; during pagination reuse page_filter.
+    (state.?skip.orValue(0) > 0 ?
+      state.page_filter
+    :
+      state.?cursor.last_update_time.orValue(
+        (now - duration(state.initial_interval)).format(time_layout.RFC3339)
+      )
+    ).as(filter_time,
+      request(
+        "GET",
+        state.url.trim_right("/") + "/v1.0/security/incidents?" + {
+          "$top": [string(state.batch_size)],
+          "$skip": [string(state.?skip.orValue(0))],
+          "$filter": ["lastUpdateDateTime ge " + filter_time],
+          "$orderby": ["lastUpdateDateTime asc"],
+          ?"$expand": state.include_alerts ? optional.of(["alerts"]) : optional.none(),
+        }.format_query()
+      ).do_request().as(resp, resp.StatusCode == 200 ?
+        bytes(resp.Body).decode_json().as(body,
+          (size(body.?value.orValue([])) == state.batch_size).as(has_more,
+            body.?value.orValue([]).as(incidents, {
+              "events": (
+                // When include_alerts is enabled, emit one event per alert (keep_parent behaviour:
+                // each event is the alert merged into its parent incident). Fall back to the
+                // incident itself when there are no alerts.
+                state.include_alerts ?
+                  incidents.flatMap(incident,
+                    (has(incident.alerts) && size(incident.alerts) > 0) ?
+                      incident.alerts.map(alert,
+                        {"message": incident.with({"alerts": [alert]}).encode_json()}
+                      )
+                    :
+                      [{"message": incident.encode_json()}]
+                  )
+                :
+                  incidents.map(e, {"message": e.encode_json()})
+              ),
+              "cursor": {
+                // Cursor is always derived from incidents (which carry lastUpdateDateTime),
+                // regardless of whether alerts are being split out.
+                "last_update_time": has_more ?
+                  state.?cursor.last_update_time.orValue(filter_time)
+                :
+                  (size(incidents) > 0 ?
+                    // Last page, ordered asc: last incident has the highest lastUpdateDateTime.
+                    incidents[size(incidents) - 1].?lastUpdateDateTime.orValue(
+                      state.?cursor.last_update_time.orValue(filter_time)
+                    )
+                  :
+                    state.?cursor.last_update_time.orValue(filter_time))
+              },
+              "page_filter": filter_time,
+              "skip": has_more ? state.?skip.orValue(0) + state.batch_size : 0,
+              "want_more": has_more,
+            })
+          )
+        )
+      :
+        {
+          "events": {
+            "error": {
+              "code": string(resp.StatusCode),
+              "id": string(resp.Status),
+              "message": "GET /v1.0/security/incidents: " + (
+                size(resp.Body) != 0 ?
+                  string(resp.Body)
+                :
+                  string(resp.Status) + " (" + string(resp.StatusCode) + ")"
+              ),
+            },
+          },
+          "want_more": false,
+        }
+      )
+    )
+  )
+tags:
+{{#if preserve_original_event}}
+  - preserve_original_event
+{{/if}}
+{{#if preserve_duplicate_custom_fields}}
+  - preserve_duplicate_custom_fields
+{{/if}}
+{{#each tags as |tag|}}
+  - {{tag}}
+{{/each}}
+{{#contains "forwarded" tags}}
+publisher_pipeline.disable_host: true
+{{/contains}}
+{{#if processors}}
+processors:
+{{processors}}
+{{/if}}
