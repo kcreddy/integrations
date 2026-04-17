@@ -19,7 +19,9 @@ auth.oauth2:
   client.secret: {{client_secret}}
   token_url: {{token_url}}/{{azure_tenant_id}}/oauth2/v2.0/token
   scopes:
-    - {{url}}/.default
+{{#each token_scopes as |token_scope|}}
+    - {{token_scope}}
+{{/each}}
 {{#if oauth_endpoint_params}}
   endpoint_params: {{oauth_endpoint_params}}
 {{/if}}

@@ -127,8 +127,8 @@ policy_templates:
         title: "Collect events using Azure Event Hub"
         description: "Collect events from Microsoft Defender XDR using Azure Event Hub"
       - type: cel
-        title: "Collect vulnerabilities using Microsoft Defender for Endpoint API"
-        description: "Collect vulnerabilities from Microsoft Defender XDR using Microsoft Defender for Endpoint API."
+        title: "Collect events using Microsoft API"
+        description: "Collect events from Microsoft Defender XDR using Microsoft Defender for Endpoint API."
         vars:
           - name: client_id
             type: text
