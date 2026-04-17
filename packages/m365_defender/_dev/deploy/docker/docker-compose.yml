@@ -54,3 +54,18 @@ services:
       - --exit-on-unmatched-rule
       - --addr=:8080
       - --config=/config.yml
+  m365-defender-alert-vulnerability-cel:
+    image: docker.elastic.co/observability/stream:v0.20.0
+    ports:
+      - 8080
+    volumes:
+      - ./alert-vulnerability-http-mock-config.yml:/config.yml
+      - ./download-vulnerability.log.gz:/download-vulnerability.log.gz
+      - ./empty.log.gz:/empty.log.gz
+    environment:
+      PORT: 8080
+    command:
+      - http-server
+      - --exit-on-unmatched-rule
+      - --addr=:8080
+      - --config=/config.yml
