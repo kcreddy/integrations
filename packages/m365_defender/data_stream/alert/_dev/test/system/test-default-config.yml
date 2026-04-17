@@ -1,13 +1,13 @@
 input: cel
-service: m365-defender-alert-http
+service: m365-defender-alert-vulnerability-cel
 vars:
-  login_url: http://{{Hostname}}:{{Port}}
+  token_url: http://{{Hostname}}:{{Port}}
   client_id: xxxx
   client_secret: xxxx
-  tenant_id: tenant_id
+  azure_tenant_id: tenant_id
 data_stream:
   vars:
-    request_url: http://{{Hostname}}:{{Port}}
+    url: http://{{Hostname}}:{{Port}}
     preserve_original_event: true
     preserve_duplicate_custom_fields: true
     include_unknown_enum_members: true

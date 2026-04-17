@@ -8,7 +8,7 @@ streams:
     template_path: cel.yml.hbs
     migrate_from: httpjson
     vars:
-      - name: request_url
+      - name: url
         type: text
         title: Request URL
         description: URL of API endpoint.

@@ -13,26 +13,29 @@ resource.ssl: {{ssl}}
 {{#if http_client_timeout}}
 resource.timeout: {{http_client_timeout}}
 {{/if}}
-resource.url: {{request_url}}
+resource.url: {{url}}
 auth.oauth2:
   client.id: {{client_id}}
   client.secret: {{client_secret}}
-  token_url: {{login_url}}/{{tenant_id}}/{{token_endpoint}}
+  token_url: {{token_url}}/{{azure_tenant_id}}/oauth2/v2.0/token
   scopes:
-    - {{request_url}}/.default
+    - {{url}}/.default
 {{#if oauth_endpoint_params}}
   endpoint_params: {{oauth_endpoint_params}}
 {{/if}}
 state:
   initial_interval: {{initial_interval}}
   batch_size: {{batch_size}}
-  include_unknown_enum_members: {{include_unknown_enum_members}}
 redact:
   fields: ~
 program: |
   state.with(
+    // Agent config and state JSON round-trips deliver numeric values as double;
+    // cast to int at the boundary so arithmetic (int + double has no overload) works.
+    int(state.batch_size).as(batch_size,
+    int(state.?skip.orValue(0)).as(skip,
     // On a fresh start (skip=0) compute filter_time from cursor; during pagination reuse page_filter.
-    (state.?skip.orValue(0) > 0 ?
+    (skip > 0 ?
       state.page_filter
     :
       state.?cursor.last_update_time.orValue(
@@ -42,19 +45,14 @@ program: |
       request(
         "GET",
         state.url.trim_right("/") + "/v1.0/security/alerts_v2?" + {
-          "$top": [string(state.batch_size)],
-          "$skip": [string(state.?skip.orValue(0))],
+          "$top": [string(batch_size)],
+          "$skip": [string(skip)],
           "$filter": ["lastUpdateDateTime ge " + filter_time],
           "$orderby": ["lastUpdateDateTime asc"],
         }.format_query()
-      ).with(
-        state.?include_unknown_enum_members.orValue(false) ?
-          {"Header": {"Prefer": ["include-unknown-enum-members"]}}
-        :
-          {}
-      ).do_request().as(resp, resp.StatusCode == 200 ?
+      ){{#if include_unknown_enum_members}}.with({"Header": {"Prefer": ["include-unknown-enum-members"]}}){{/if}}.do_request().as(resp, resp.StatusCode == 200 ?
         bytes(resp.Body).decode_json().as(body,
-          (size(body.?value.orValue([])) == state.batch_size).as(has_more, {
+          (size(body.?value.orValue([])) == batch_size).as(has_more, {
             "events": body.?value.orValue([]).map(e, {"message": e.encode_json()}),
             "cursor": {
               "last_update_time": has_more ?
@@ -68,7 +66,7 @@ program: |
                   state.?cursor.last_update_time.orValue(filter_time))
             },
             "page_filter": filter_time,
-            "skip": has_more ? state.?skip.orValue(0) + state.batch_size : 0,
+            "skip": has_more ? skip + batch_size : 0,
             "want_more": has_more,
           })
         )
@@ -90,7 +88,7 @@ program: |
         }
       )
     )
-  )
+  )))
 tags:
 {{#if preserve_original_event}}
   - preserve_original_event
