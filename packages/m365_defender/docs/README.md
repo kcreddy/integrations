@@ -199,11 +199,11 @@ An example event for `alert` looks as following:
 {
     "@timestamp": "2023-10-20T09:54:07.503Z",
     "agent": {
-        "ephemeral_id": "f0b1ddcf-5c43-49cb-be37-acefdf4372d0",
-        "id": "d6e963cc-04ee-46b8-af02-520891431883",
-        "name": "elastic-agent-85133",
+        "ephemeral_id": "33e7b999-1ee5-4c48-9c44-cbb95387039e",
+        "id": "7415fdeb-d9c8-4db3-97d2-ddffe6f8f44e",
+        "name": "elastic-agent-89564",
         "type": "filebeat",
-        "version": "8.19.4"
+        "version": "9.4.0"
     },
     "cloud": {
         "account": {
@@ -212,21 +212,19 @@ An example event for `alert` looks as following:
     },
     "data_stream": {
         "dataset": "m365_defender.alert",
-        "namespace": "57227",
+        "namespace": "83723",
         "type": "logs"
     },
     "device": {
-        "id": [
-            "f18bd540-d5e4-46e0-8ddd-3d03a59e4e14"
-        ]
+        "id": "f18bd540-d5e4-46e0-8ddd-3d03a59e4e14"
     },
     "ecs": {
         "version": "8.11.0"
     },
     "elastic_agent": {
-        "id": "d6e963cc-04ee-46b8-af02-520891431883",
-        "snapshot": false,
-        "version": "8.19.4"
+        "id": "7415fdeb-d9c8-4db3-97d2-ddffe6f8f44e",
+        "snapshot": true,
+        "version": "9.4.0"
     },
     "event": {
         "agent_id_status": "verified",
@@ -238,8 +236,9 @@ An example event for `alert` looks as following:
         "duration": 2478000000,
         "end": "2023-10-20T09:51:41.993Z",
         "id": "daefa1828b-dd4e-405c-8a3b-aa28596830dd_1",
-        "ingested": "2026-01-05T12:04:28Z",
+        "ingested": "2026-04-17T12:37:48Z",
         "kind": "alert",
+        "module": "m365_defender",
         "original": "{\"actorDisplayName\":null,\"additionalData\":null,\"alertPolicyId\":null,\"alertWebUrl\":\"https://security.microsoft.com/alerts/daefa1828b-dd4e-405c-8a3b-aa28596830dd_1?tid=3adb963c-8e61-48e8-a06d-6dbb0dacea39\",\"assignedTo\":null,\"category\":\"Execution\",\"classification\":null,\"comments\":[],\"createdDateTime\":\"2023-10-20T09:53:09.8839373Z\",\"description\":\"A suspicious PowerShell activity was observed on the machine. \\nThis behavior may indicate that PowerShell was used during installation, exploration, or in some cases in lateral movement activities which are used by attackers to invoke modules, download external payloads, or get more information about the system. Attackers usually use PowerShell to bypass security protection mechanisms by executing their payload in memory without touching the disk and leaving any trace.\",\"detectionSource\":\"microsoftDefenderForEndpoint\",\"detectorId\":\"7f1c3609-a3ff-40e2-995b-c01770161d68\",\"determination\":null,\"evidence\":[{\"@odata.type\":\"#microsoft.graph.security.deviceEvidence\",\"azureAdDeviceId\":\"f18bd540-d5e4-46e0-8ddd-3d03a59e4e14\",\"createdDateTime\":\"2023-10-20T09:53:10.1933333Z\",\"defenderAvStatus\":\"notSupported\",\"detailedRoles\":[\"PrimaryDevice\"],\"deviceDnsName\":\"clw555test\",\"firstSeenDateTime\":\"2023-10-20T09:50:17.7383987Z\",\"healthStatus\":\"inactive\",\"ipInterfaces\":[\"192.168.5.65\",\"fe80::cfe4:80b:615c:38fb\",\"127.0.0.1\",\"::1\"],\"loggedOnUsers\":[{\"accountName\":\"CDPUserIS-38411\",\"domainName\":\"AzureAD\"}],\"mdeDeviceId\":\"505d70d89cfa3428f7aac7d2eb3a64c60fd3d843\",\"onboardingStatus\":\"onboarded\",\"osBuild\":22621,\"osPlatform\":\"Windows11\",\"rbacGroupId\":0,\"rbacGroupName\":null,\"remediationStatus\":\"none\",\"remediationStatusDetails\":null,\"riskScore\":\"high\",\"roles\":[],\"tags\":[],\"verdict\":\"unknown\",\"version\":\"22H2\",\"vmMetadata\":null}],\"firstActivityDateTime\":\"2023-10-20T09:51:39.5154802Z\",\"id\":\"daefa1828b-dd4e-405c-8a3b-aa28596830dd_1\",\"incidentId\":\"23\",\"incidentWebUrl\":\"https://security.microsoft.com/incidents/23?tid=3adb963c-8e61-48e8-a06d-6dbb0dacea39\",\"lastActivityDateTime\":\"2023-10-20T09:51:41.9939003Z\",\"lastUpdateDateTime\":\"2023-10-20T09:54:07.5033333Z\",\"mitreTechniques\":[\"T1059.001\"],\"productName\":\"Microsoft Defender for Endpoint\",\"providerAlertId\":\"efa1828b-dd4e-405c-8a3b-aa28596830dd_1\",\"recommendedActions\":\"1. Examine the PowerShell command line to understand what commands were executed. Note: the content may need to be decoded if it is Base64-encoded.\\n2. Search the script for more indicators to investigate - for example IP addresses (potential C\\u0026C servers), target computers etc.\\n3. Explore the timeline of this and other related machines for additional suspect activities around the time of the alert.\\n4. Look for the process that invoked this PowerShell run and their origin. Consider submitting any suspect files in the chain for deep analysis for detailed behavior information.\",\"resolvedDateTime\":null,\"serviceSource\":\"microsoftDefenderForEndpoint\",\"severity\":\"medium\",\"status\":\"new\",\"tenantId\":\"3adb963c-8e61-48e8-a06d-6dbb0dacea39\",\"threatDisplayName\":null,\"threatFamilyName\":null,\"title\":\"Suspicious PowerShell command line\"}",
         "provider": "microsoftDefenderForEndpoint",
         "severity": 47,
@@ -250,12 +249,8 @@ An example event for `alert` looks as following:
         "url": "https://security.microsoft.com/alerts/daefa1828b-dd4e-405c-8a3b-aa28596830dd_1?tid=3adb963c-8e61-48e8-a06d-6dbb0dacea39"
     },
     "host": {
-        "hostname": [
-            "clw555test"
-        ],
-        "id": [
-            "505d70d89cfa3428f7aac7d2eb3a64c60fd3d843"
-        ],
+        "hostname": "clw555test",
+        "id": "505d70d89cfa3428f7aac7d2eb3a64c60fd3d843",
         "ip": [
             "192.168.5.65",
             "fe80::cfe4:80b:615c:38fb",
@@ -263,12 +258,8 @@ An example event for `alert` looks as following:
             "::1"
         ],
         "os": {
-            "name": [
-                "Windows11"
-            ],
-            "version": [
-                "22H2"
-            ]
+            "name": "Windows11",
+            "version": "22H2"
         }
     },
     "input": {
@@ -281,43 +272,37 @@ An example event for `alert` looks as following:
             "description": "A suspicious PowerShell activity was observed on the machine. \nThis behavior may indicate that PowerShell was used during installation, exploration, or in some cases in lateral movement activities which are used by attackers to invoke modules, download external payloads, or get more information about the system. Attackers usually use PowerShell to bypass security protection mechanisms by executing their payload in memory without touching the disk and leaving any trace.",
             "detection_source": "microsoftDefenderForEndpoint",
             "detector_id": "7f1c3609-a3ff-40e2-995b-c01770161d68",
-            "evidence": [
-                {
-                    "azure_ad_device_id": "f18bd540-d5e4-46e0-8ddd-3d03a59e4e14",
-                    "created_datetime": "2023-10-20T09:53:10.193Z",
-                    "defender_av_status": "notSupported",
-                    "detailed_roles": [
-                        "PrimaryDevice"
-                    ],
-                    "device_dns_name": "clw555test",
-                    "first_seen_datetime": "2023-10-20T09:50:17.738Z",
-                    "health_status": "inactive",
-                    "ip_interfaces": [
-                        "192.168.5.65",
-                        "fe80::cfe4:80b:615c:38fb",
-                        "127.0.0.1",
-                        "::1"
-                    ],
-                    "logged_on_users": [
-                        {
-                            "account_name": "CDPUserIS-38411",
-                            "domain_name": "AzureAD"
-                        }
-                    ],
-                    "mde_device_id": "505d70d89cfa3428f7aac7d2eb3a64c60fd3d843",
-                    "odata_type": "#microsoft.graph.security.deviceEvidence",
-                    "onboarding_status": "onboarded",
-                    "os_build": "22621",
-                    "os_platform": "Windows11",
-                    "rbac_group": {
-                        "id": "0"
-                    },
-                    "remediation_status": "none",
-                    "risk_score": "high",
-                    "verdict": "unknown",
-                    "version": "22H2"
-                }
-            ],
+            "evidence": {
+                "azure_ad_device_id": "f18bd540-d5e4-46e0-8ddd-3d03a59e4e14",
+                "created_datetime": "2023-10-20T09:53:10.193Z",
+                "defender_av_status": "notSupported",
+                "detailed_roles": "PrimaryDevice",
+                "device_dns_name": "clw555test",
+                "first_seen_datetime": "2023-10-20T09:50:17.738Z",
+                "health_status": "inactive",
+                "ip_interfaces": [
+                    "192.168.5.65",
+                    "fe80::cfe4:80b:615c:38fb",
+                    "127.0.0.1",
+                    "::1"
+                ],
+                "logged_on_users": {
+                    "account_name": "CDPUserIS-38411",
+                    "domain_name": "AzureAD"
+                },
+                "mde_device_id": "505d70d89cfa3428f7aac7d2eb3a64c60fd3d843",
+                "odata_type": "#microsoft.graph.security.deviceEvidence",
+                "onboarding_status": "onboarded",
+                "os_build": "22621",
+                "os_platform": "Windows11",
+                "rbac_group": {
+                    "id": "0"
+                },
+                "remediation_status": "none",
+                "risk_score": "high",
+                "verdict": "unknown",
+                "version": "22H2"
+            },
             "first_activity_datetime": "2023-10-20T09:51:39.515Z",
             "id": "daefa1828b-dd4e-405c-8a3b-aa28596830dd_1",
             "incident_id": "23",
@@ -330,9 +315,7 @@ An example event for `alert` looks as following:
             },
             "last_activity_datetime": "2023-10-20T09:51:41.993Z",
             "last_update_datetime": "2023-10-20T09:54:07.503Z",
-            "mitre_techniques": [
-                "T1059.001"
-            ],
+            "mitre_techniques": "T1059.001",
             "provider_alert_id": "efa1828b-dd4e-405c-8a3b-aa28596830dd_1",
             "recommended_actions": "1. Examine the PowerShell command line to understand what commands were executed. Note: the content may need to be decoded if it is Base64-encoded.\n2. Search the script for more indicators to investigate - for example IP addresses (potential C&C servers), target computers etc.\n3. Explore the timeline of this and other related machines for additional suspect activities around the time of the alert.\n4. Look for the process that invoked this PowerShell run and their origin. Consider submitting any suspect files in the chain for deep analysis for detailed behavior information.",
             "service_source": "microsoftDefenderForEndpoint",
