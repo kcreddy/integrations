@@ -12,3 +12,5 @@ services:
       - http-server
       - --addr=:8080
       - --config=/config.yml
+      - --delay-rate=1.0
+      - --delay-duration=50ms
