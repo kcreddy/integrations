@@ -1,0 +1,106 @@
+# Standalone Elastic Agent config for the agentless m365_defender `alert` httpjson
+# input, matching what agentless-controller deploys (single elastic-agent container,
+# monitoring on but logs/metrics collection off, no GOMEMLIMIT).
+#
+# The block between the SHIP LOGIC markers below is a rendered copy of
+# data_stream/alert/agent/stream/httpjson.yml.hbs (request.transforms +
+# response.pagination + response.split + cursor) with two deliberate deviations:
+# batch_size is a huge sentinel (2000000000) so the real time-boundary pagination
+# guard evaluates false and the input halts after one page (single-page decode = the
+# peak), and initial_interval is fixed at 24h. Everything outside the markers is
+# harness scaffolding: auth + URL point at the mock, interval is 24h so the input
+# fires once, and the output points at an unreachable ES on purpose so decoded events
+# are held in memory (conservative worst case) without adding page cache.
+# preserve_original_event roughly doubles the retained per-event size (event.original
+# copy) and ships in production.
+#
+# Drift guard: run.sh hashes the source .hbs against streams/hbs.sha256 and refuses
+# to run if it changed. To refresh after a package change, re-copy the block between
+# the markers from the .hbs (indent by 4 to sit under inputs[].streams[], substitute
+# batch_size/initial_interval as above, and drop any {{#if include_*}} wrappers while
+# keeping their bodies), then update streams/hbs.sha256 as the error message says.
+outputs:
+  default:
+    type: elasticsearch
+    hosts: ["http://127.0.0.1:9200"]
+agent:
+  monitoring:
+    enabled: true
+    http:
+      enabled: true
+      host: 0.0.0.0
+      port: 6791
+    logs: false
+    metrics: false
+  logging:
+    level: info
+    to_stderr: true
+inputs:
+- type: httpjson
+  id: m365d-alert-worstcase
+  use_output: default
+  data_stream:
+    namespace: default
+  streams:
+  - id: httpjson-m365d-alert-worstcase
+    data_stream:
+      dataset: m365_defender.alert
+      type: logs
+    config_version: 2
+    interval: 24h
+    auth.oauth2.client.id: test-client-id
+    auth.oauth2.client.secret: test-client-secret
+    auth.oauth2.token_url: http://svc-m365d:8082/tenant_id/oauth2/v2.0/token
+    auth.oauth2.scopes: http://svc-m365d:8082/.default
+    auth.oauth2.endpoint_params:
+      grant_type:
+        - client_credentials
+    request.url: http://svc-m365d:8082/v1.0/security/alerts_v2
+    request.timeout: 300s
+    # --- SHIP LOGIC: rendered from data_stream/alert/agent/stream/httpjson.yml.hbs ---
+    request.transforms:
+      - set:
+          target: url.params.$top
+          value: 2000000000
+      - set:
+          target: url.params.$skip
+          value: 0
+      - set:
+          target: url.params.$filter
+          value: 'lastUpdateDateTime ge [[.cursor.last_update_time]]'
+          default: 'lastUpdateDateTime ge [[formatDate (now (parseDuration "-24h"))]]'
+      - set:
+          target: url.params.$orderby
+          value: 'lastUpdateDateTime asc'
+      - set:
+          target: "header.Prefer"
+          value: 'include-unknown-enum-members'
+    response.pagination:
+      # The Graph security API caps $skip at 500 and $top at 1000, and alerts_v2 does
+      # not return @odata.nextLink, so we cannot page with a growing $skip offset.
+      # Instead, keep $skip at 0 and advance the $filter time boundary: on a full page
+      # (len == batch_size) move to 'lastUpdateDateTime gt <max lastUpdateDateTime in
+      # page>' (the last element, since $orderby is ascending). A non-full page renders
+      # an empty value, which stops pagination.
+      # https://github.com/microsoftgraph/microsoft-graph-docs-contrib/blob/main/api-reference/beta/resources/security-error-codes.md#constraints
+      - set:
+          target: url.params.$filter
+          value: '[[if (eq (len .last_response.body.value) 2000000000)]]lastUpdateDateTime gt [[(index .last_response.body.value (add (toInt (len .last_response.body.value)) -1)).lastUpdateDateTime]][[end]]'
+          fail_on_template_error: true
+          do_not_log_failure: true
+      - set:
+          target: url.params.$skip
+          value: '0'
+          fail_on_template_error: true
+          do_not_log_failure: true
+    response.split:
+      target: body.value
+      ignore_empty_value: true
+    cursor:
+      last_update_time:
+        value: '[[.last_event.lastUpdateDateTime]]'
+    # --- END SHIP LOGIC ---
+    tags:
+      - preserve_original_event
+      - forwarded
+    publisher_pipeline.disable_host: true
